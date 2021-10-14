@@ -18,17 +18,25 @@
     crossorigin="anonymous"
   ></script>
   
-  <script defer src="js/app.js"></script>
+  <script defer src="js/app.js" type="module"></script>
   <link rel="stylesheet" href="css/style.css"
 </head>
-
-<body>
   
-<h1>BLACKJACK!</h1>
+<body>
+<main>
 
-<button id="hitBtn" type="button" class="btn btn-primary">HIT</button>
-<button id="standBtn" type="button" class="btn btn-secondary">STAND</button>
-<button id="dealBtn" type="button" class="btn btn-success" >DEAL!</button>
+  
+<h1 id="title">BLACKJACK!</h1>
 
+<div id="button-container">
+  <button id="hitBtn" type="button" class="btn btn-primary">HIT</button>
+  <button id="standBtn" type="button" class="btn btn-secondary">STAND</button>
+  <button id="dealBtn" type="button" class="btn btn-success" >DEAL!</button>
+  <button id="homeBtn" type="button" class="btn btn-dark" >Home</button>
+</div>
+
+
+
+<main>
 </body>
 </html>
