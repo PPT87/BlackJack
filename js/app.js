@@ -5,16 +5,11 @@ const fullDeck = [
   "cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02",
   "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"
 ]
-// const fullDeck = [
-//   2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11,
-//   2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11,
-//   2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11,
-//   2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11,
-// ]
+
 
 
 /*-------------------------------- Variables --------------------------------*/
-let playerHand, playerCount, dealerHand, dealerCount, deck, winner,turn, loser
+let playerHand, playerCount, dealerHand, dealerCount, deck, winner,turn,loser
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -49,25 +44,30 @@ function init(){
   dealerCount = 0,
   winner = false,
   loser = false
-
 }
 
-
-function render(){
-
-}
-
-function isWinner(){
-
-}
-
-function isLoser(){
-
-}
 
 function shuffleDeck(fullDeck){
   let randomCard = Math.floor(fullDeck.length * Math.random())
   return fullDeck[randomCard]
-
 }
 console.log(shuffleDeck(fullDeck))
+
+function gameStart(){
+  playerHand = [shuffleDeck(fullDeck), shuffleDeck(fullDeck)]
+  dealerHand = [shuffleDeck(fullDeck), shuffleDeck(fullDeck)]
+}
+gameStart()
+console.log(`Player Hand: ${playerHand}`)
+console.log(`Dealer Hand: ${dealerHand}`)
+
+function isWinner(){
+  
+}
+
+function isLoser(){
+  
+}
+
+
+
