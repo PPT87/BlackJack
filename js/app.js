@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-const fullDeck = [
+fullDeck =[
   "dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02",
   "hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02",
   "cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02",
@@ -9,74 +9,112 @@ const fullDeck = [
 
 
 /*-------------------------------- Variables --------------------------------*/
-let playerHand, playerCount, dealerHand, dealerCount, deck, winner,turn
-
+// Declare deck variables
+let deck1 = []
+let deck2 = []
+let deck3 = []
+let deck4 = []
+let deckD = []
 
 /*------------------------ Cached Element References ------------------------*/
-const hitButton = document.querySelector("#hitBtn")
-const standButton = document.querySelector("#standBtn")
-const dealButton   = document.querySelector("#dealBtn")
-const homeButton = document.querySelector("#homeBtn")
+// Cached element references
+let deckDEl = document.getElementById('deckD')
+let deck1El = document.getElementById('deck1')
+let deck2El = document.getElementById('deck2')
+let deck3El = document.getElementById('deck3')
+let deck4El = document.getElementById('deck4')
+let homeBtn = document.getElementById('homeBtn')
+let lightDarkBtn = document.getElementById('lightDarkBtn')
+let dealBtn = document.getElementById('dealBtn')
+let hitBtn = document.getElementById('hitBtn')
+let standBtn = document.getElementById('standBtn')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-hitButton.addEventListener("click", () => {
-  console.log('Hit button is working')
+// Event listeners
+document.getElementById('dealBtn').addEventListener('click', hit)
+document.getElementById('hitBtn').addEventListener('click', () => {
+console.log('hit button works')
+})
+document.getElementById('standBtn').addEventListener('click', () => {
+  console.log('stand button works')
+})
+document.getElementById('homeBtn').addEventListener('click', () => {
+console.log('home button works')
+})
+document.getElementById('lightDarkBtn').addEventListener('click', () => {
+console.log('light/dark button works')
 })
 
-standButton.addEventListener("click", () => {
-  console.log('Stand button is working')
-})
 
-dealButton.addEventListener("click", () => {
-  console.log('Deal button is working')
-})
-
-homeButton.addEventListener("click", () => {
-  console.log('Home button is working')
-})
 
 /*-------------------------------- Functions --------------------------------*/
+// Functions
+init()
+
 function init(){
-  playerHand = [],
-  dealerHand = [],
-  playerCount = 0,
-  dealerCount = 0,
-  winner = false,
-  deck =[]
-}
+  // Initialize deck 1 with array of 52 cards 
+  deckD =[
+  "dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02",
+  "hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02",
+  "cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02",
+  "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"
+]}
 
-//Generate random card
-function shuffleDeck(){
-  let randomCard = Math.floor(fullDeck.length * Math.random())
-  return fullDeck[randomCard]
-}
+// need a function to assign values to each index of the array
+// A = 1 or 11
 
-//Deals 2 random cards to the playerHand and dealerHand
-function dealCards(){
-  playerHand = [shuffleDeck(fullDeck), shuffleDeck(fullDeck)]
-  dealerHand = [shuffleDeck(fullDeck), shuffleDeck(fullDeck)]
-}
-dealCards()
-console.log(`Player Hand: ${playerHand}`)
-console.log(`Dealer Hand: ${dealerHand}`)
 
-//Need to convert deck elements to numbers
-function handCount(){
-  for (let i=0; i<playerHand.length; i++){
-    playerCount += playerHand[i]
+
+
+function hit(){
+  // Function to handle a button click:
+  if(deckD.length>0){
+    // Randomly select number (to be used as our index) from total cards remaining
+    let randCard = Math.floor(Math.random() * deckD.length)
+    console.log(randCard)
+    // Assign card with the random index to a variable
+    let cardPicked = deckD.splice(randCard, 1)
+    // Add card picked to deck 2
+    deck2.push(cardPicked)
+    // Pass card picked to render function to display
+    render(cardPicked)
+    console.log('deckD', deckD.length)
+    console.log("deck2", deck2.length)
   }
-    for (let j=0; j<dealerHand.length; j++){
-      dealerCount += dealerHand[j]
-    }
 }
-handCount()
-console.log(`Your Total: ${playerCount}`)
-console.log(`Dealer Total: ${dealerCount}`)
 
-function isWinner(){
-  
+function render(cardPicked) {
+  // Removes outline class when first card is picked
+  if (deck2.length === 1) {  
+    deck2El.classList.remove("outline")
+  }
+
+	// Remove previous picked card from deck 2 class list
+  if (deck2.length > 1) {  
+    deck2El.classList.remove(cardToRemove)
+  }
+
+	// Set card to be removed on next click
+  cardToRemove = cardPicked  
+
+	// Add current card picked to deck 2 array
+  deck1El.classList.add(cardPicked)
+  deck2El.classList.add(cardPicked)  
+
+  // Adjust shadow when deck gets above/below halfway full
+  if (deck2.length === 26) {  
+    deckDEl.classList.remove("shadow");
+    deck2El.classList.add("shadow");
+  }
+
+  // Remove card back color and add outline when last card is picked
+  if (deckD.length === 0) {  
+    deckDEl.classList.remove("back-red");
+    deckDEl.classList.add("outline");
+  }
 }
+
 
 
 
