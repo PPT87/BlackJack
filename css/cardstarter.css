@@ -1,3 +1,34 @@
+html {
+  box-sizing: border-box
+}
+
+/* The Universal Selector */
+*, /* All elements*/
+*::before, /* All ::before pseudo-elements */
+*::after { /* All ::after pseudo-elements */
+  /* height & width will now include border & padding by default
+     but can be over-ridden as needed */
+  box-sizing: inherit;
+}
+
+/* resets font size to be 62.5% of the user preference - 
+   in most browser configurations this will be 10px */
+:root {
+  font-size: 62.5%
+}
+
+body {
+  background-color: lightgray;
+/* Use a system font, if none are available use an available sans-sarif   font */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 @charset "UTF-8";
 .card {
   box-sizing: border-box;
@@ -346,3 +377,10 @@
   .card.east.shadow,
   .card.E.shadow {
     box-shadow: -2px 2px 3px 0 rgba(41, 41, 41, 0.75); }
+
+
+
+    @media only screen and (min-width: 600px) {
+
+
+    }

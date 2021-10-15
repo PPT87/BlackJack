@@ -15,7 +15,10 @@ let deck2 = []
 let deck3 = []
 let deck4 = []
 let deckD = []
-
+let playerHand = []
+let dealerHand = []
+let playerCount = 0
+let dealerCount = 0
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
 let deckDEl = document.getElementById('deckD')
@@ -33,6 +36,7 @@ let standBtn = document.getElementById('standBtn')
 /*----------------------------- Event Listeners -----------------------------*/
 // Event listeners
 document.getElementById('dealBtn').addEventListener('click', hit)
+
 document.getElementById('hitBtn').addEventListener('click', () => {
 console.log('hit button works')
 })
@@ -69,14 +73,15 @@ function init(){
 
 function hit(){
   // Function to handle a button click:
-  if(deckD.length>0){
+  if(deckD.length > 0){
     // Randomly select number (to be used as our index) from total cards remaining
     let randCard = Math.floor(Math.random() * deckD.length)
     console.log(randCard)
     // Assign card with the random index to a variable
     let cardPicked = deckD.splice(randCard, 1)
-    // Add card picked to deck 2
+    // Add card picked to deck 1
     deck2.push(cardPicked)
+    
     // Pass card picked to render function to display
     render(cardPicked)
     console.log('deckD', deckD.length)
@@ -85,30 +90,32 @@ function hit(){
 }
 
 function render(cardPicked) {
-  // Removes outline class when first card is picked
-  if (deck2.length === 1) {  
+  // Removes outline class when first card is placed
+  if (deck1.length === 1 || deck2.length === 1|| deck3.length === 1|| deck4.length === 1) {  
+    deck1El.classList.remove("outline")
     deck2El.classList.remove("outline")
+    deck3El.classList.remove("outline")
+    deck4El.classList.remove("outline")
   }
 
 	// Remove previous picked card from deck 2 class list
-  if (deck2.length > 1) {  
+  if (deck1.length > 1 || deck2.length > 1 || deck3.length > 1 || deck4.length > 1) {  
+    deck1El.classList.remove(cardToRemove)
     deck2El.classList.remove(cardToRemove)
+    deck3El.classList.remove(cardToRemove)
+    deck4El.classList.remove(cardToRemove)
   }
 
 	// Set card to be removed on next click
   cardToRemove = cardPicked  
 
-	// Add current card picked to deck 2 array
+	// Add current card picked to deck array
   deck1El.classList.add(cardPicked)
   deck2El.classList.add(cardPicked)  
+  deck3El.classList.add(cardPicked)
+  deck4El.classList.add(cardPicked)
 
-  // Adjust shadow when deck gets above/below halfway full
-  if (deck2.length === 26) {  
-    deckDEl.classList.remove("shadow");
-    deck2El.classList.add("shadow");
-  }
-
-  // Remove card back color and add outline when last card is picked
+  // Remove card back color and add outline when last card of dealerD is picked
   if (deckD.length === 0) {  
     deckDEl.classList.remove("back-red");
     deckDEl.classList.add("outline");
