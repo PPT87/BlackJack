@@ -35,11 +35,12 @@ let standBtn = document.getElementById('standBtn')
 
 /*----------------------------- Event Listeners -----------------------------*/
 // Event listeners
-document.getElementById('dealBtn').addEventListener('click', hit)
+document.getElementById('hitBtn').addEventListener('click', hit)
 
-document.getElementById('hitBtn').addEventListener('click', () => {
-console.log('hit button works')
+document.getElementById('dealBtn').addEventListener('click', () => {
+  console.log('deal button works')
 })
+
 document.getElementById('standBtn').addEventListener('click', () => {
   console.log('stand button works')
 })
@@ -65,8 +66,12 @@ function init(){
   "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"
 ]}
 
-// need a function to assign values to each index of the array
-// A = 1 or 11
+// Function to assign index values
+function cardValues(){
+  
+
+}
+
 
 
 
@@ -80,12 +85,9 @@ function hit(){
     // Assign card with the random index to a variable
     let cardPicked = deckD.splice(randCard, 1)
     // Add card picked to deck 1
-    deck2.push(cardPicked)
-    
+    deck1.push(cardPicked)
     // Pass card picked to render function to display
     render(cardPicked)
-    console.log('deckD', deckD.length)
-    console.log("deck2", deck2.length)
   }
 }
 
@@ -111,9 +113,8 @@ function render(cardPicked) {
 
 	// Add current card picked to deck array
   deck1El.classList.add(cardPicked)
-  deck2El.classList.add(cardPicked)  
-  deck3El.classList.add(cardPicked)
-  deck4El.classList.add(cardPicked)
+
+
 
   // Remove card back color and add outline when last card of dealerD is picked
   if (deckD.length === 0) {  
@@ -122,7 +123,20 @@ function render(cardPicked) {
   }
 }
 
-
-
-
-
+function isWinner (){
+  if (playerCount > 21){
+    return `BUST! You Lose!`
+  }else if (dealerCount > 21){
+    return `Dealer BUSTS! You Win!`
+  }else if (playerCount === 21 && playerCount > dealerCount){
+    return `BLACKJACK! You Win!`
+  }else if (playerCount > dealerCount){
+    return `You Win!`
+  }else if (dealerCount === 21 && dealerCount > playerCount){
+    return `Dealer got BLACKJACK! You Lose!`
+  }else if (dealerCount > playerCount){
+    return `You Lose!`
+  }else {
+    return `DRAW!`
+  }
+}
