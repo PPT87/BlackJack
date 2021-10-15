@@ -9,7 +9,7 @@ const fullDeck = [
 
 
 /*-------------------------------- Variables --------------------------------*/
-let playerHand, playerCount, dealerHand, dealerCount, deck, winner,turn,loser
+let playerHand, playerCount, dealerHand, dealerCount, deck, winner,turn
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -43,31 +43,41 @@ function init(){
   playerCount = 0,
   dealerCount = 0,
   winner = false,
-  loser = false
+  deck =[]
 }
 
-
-function shuffleDeck(fullDeck){
+//Generate random card
+function shuffleDeck(){
   let randomCard = Math.floor(fullDeck.length * Math.random())
   return fullDeck[randomCard]
 }
-console.log(shuffleDeck(fullDeck))
 
-function gameStart(){
+//Deals 2 random cards to the playerHand and dealerHand
+function dealCards(){
   playerHand = [shuffleDeck(fullDeck), shuffleDeck(fullDeck)]
   dealerHand = [shuffleDeck(fullDeck), shuffleDeck(fullDeck)]
 }
-gameStart()
+dealCards()
 console.log(`Player Hand: ${playerHand}`)
 console.log(`Dealer Hand: ${dealerHand}`)
+
+//Need to convert deck elements to numbers
+function handCount(){
+  for (let i=0; i<playerHand.length; i++){
+    playerCount += playerHand[i]
+  }
+    for (let j=0; j<dealerHand.length; j++){
+      dealerCount += dealerHand[j]
+    }
+}
+handCount()
+console.log(`Your Total: ${playerCount}`)
+console.log(`Dealer Total: ${dealerCount}`)
 
 function isWinner(){
   
 }
 
-function isLoser(){
-  
-}
 
 
 
