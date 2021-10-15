@@ -348,7 +348,7 @@ body {
   background-image: url("../images/backs/blue.svg"); }
 
 .card.back-red {
-  background-image: url("../images/backs/red.svg"); }
+  background-image: url("../images/backs/blue.svg"); }
 
 /* Re-orients the cards for different directions. While
    they are symmetric, it's still important to orient
