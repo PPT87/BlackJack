@@ -1,25 +1,19 @@
 /*-------------------------------- Constants --------------------------------*/
-fullDeck =[
-  "dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02",
-  "hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02",
-  "cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02",
-  "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"
-]
 
 
 
 /*-------------------------------- Variables --------------------------------*/
 // Declare deck variables
-let deck1 = []
-let deck2 = []
-let deck3 = []
-let deck4 = []
-let deckD = []
+let dealerDeck = []
 let playerHand = []
 let dealerHand = []
 let playerCount = 0
-let dealerCount = 0
-let winner = false
+let dealerInitialCount = 0
+let dealerFinalCount = 0
+let dealerTurn = false
+let endRound = true
+let dealCard = 0
+let message = ''
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
 let homeBtn = document.getElementById('homeBtn')
@@ -29,126 +23,78 @@ let deck1El = document.getElementById('deck1')
 let deck2El = document.getElementById('deck2')
 let deck3El = document.getElementById('deck3')
 let deck4El = document.getElementById('deck4')
-let dealBtn = document.getElementById('dealBtn')
+let playBtn = document.getElementById('playBtn')
+let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
 
+playBtn.setAttribute("hidden", false)
+hitBtn.setAttribute("hidden", true)
+standBtn.setAttribute("hidden", true)
+playAgainBtn.setAttribute("hidden", true)
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 // Event listeners
-document.getElementById('hitBtn').addEventListener('click', hit)
+document.getElementById('hitBtn').addEventListener('click', () => {
+  console.log('hit button works')
+})
 
-document.getElementById('dealBtn').addEventListener('click', () => {
-  console.log('deal button works')
+document.getElementById('playAgainBtn').addEventListener('click', () => { 
+  console.log('play again button works')
 })
 
 document.getElementById('standBtn').addEventListener('click', () => {
   console.log('stand button works')
 })
-document.getElementById('homeBtn').addEventListener('click', () => {
+document.getElementById('homeBtn').addEventListener('click', () => { 
 console.log('home button works')
 })
 document.getElementById('lightDarkBtn').addEventListener('click', () => {
 console.log('light/dark button works')
 })
 
+document.getElementById('playBtn').addEventListener('click', gameStart)
 
 
 /*-------------------------------- Functions --------------------------------*/
-// Functions
-init()
+gameStart()
 
-function init(){
-  // Initialize deck 1 with array of 52 cards 
-  deckD =[
-  "dA","dQ","dK","dJ","d10","d09","d08","d07","d06","d05","d04","d03","d02",
-  "hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02",
-  "cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02",
-  "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"
-]
-
-
-
-
-}
-// Function to assign index values
-// How to handle Aces (1 or 11)
-function cardWeight(){
-  let cardValue = []
-  for (let i=0; i<deckD.length; i++){
-    if (i === "dQ"){
-      cardValue = 10
-    }
+//When PLAY button is clicked, everything is reset and cards are dealt. 
+function gameStart(){
+  if (endRound === true){
+    dealerTurn = false
+    endRound = false
+    playBtn.setAttribute("hidden", true)
+    playAgainBtn.setAttribute("hidden", true)
+    
   }
-}
-
-
-
-
-
-function render(cardPicked) {
-  // Removes outline class when first card is placed
-  if (deck1.length === 1 || deck2.length === 1|| deck3.length === 1|| deck4.length === 1) {  
-    deck1El.classList.remove("outline")
-    deck2El.classList.remove("outline")
-    deck3El.classList.remove("outline")
-    deck4El.classList.remove("outline")
+  // Empty player and dealer hands
+  if (playerHand.length > 0){
+    playerHand.splice(0, playerHand.length)
+    dealerHand.splice(0, dealerHand.length)
   }
-
-	// Remove previous picked card from deck 2 class list
-  if (deck1.length > 1 || deck2.length > 1 || deck3.length > 1 || deck4.length > 1) {  
-    deck1El.classList.remove(cardToRemove)
-    deck2El.classList.remove(cardToRemove)
-    deck3El.classList.remove(cardToRemove)
-    deck4El.classList.remove(cardToRemove)
+  // Deal out initial cards.
+  for (let i=0; i<2; i++){ //loops 2 times to deal out 2 cards
+    dealCard = getRandomCard() // get 1 random card
+    playerHand.push(dealerDeck[dealCard]) // push random card to player hand. 
+    dealerDeck.splice(dealCard, 1)// remove random card from the deck
+    dealCard = getRandomCard() //get 1 random card
+    dealerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
+    dealerDeck.splice(dealCard, 1) // remove random card from the deck
   }
-
-	// Set card to be removed on next click
-  cardToRemove = cardPicked  
-
-	// Add current card picked to deck array
-  deck1El.classList.add(cardPicked)
-
-  // Remove card back color and add outline when last card of dealerD is picked
-  if (deckD.length === 0) {  
-    deckDEl.classList.remove("back-red");
-    deckDEl.classList.add("outline");
-  }
+  //render()// displays deal and sums to Player and Dealer
 }
 
-function hit(){
-  // Function to handle a button click:
-  if(deckD.length > 0){
-    // Randomly select number (to be used as our index) from total cards remaining
-    let randCard = Math.floor(Math.random() * deckD.length)
-    console.log(randCard)
-    // Assign card with the random index to a variable
-    let cardPicked = deckD.splice(randCard, 1)
-    // Add card picked to deck 1
-    deck1.push(cardPicked)
-    // Pass card picked to render function to display
-    render(cardPicked)
-  }
+// get random card from dealerDeck
+function getRandomCard() {
+  dealerDeck.push( 
+          "dA","dQ","dK","dJ","d10","d9","d8","d7","d6","d5","d4","d3","d2",
+          "hA","hQ","hK","hJ","h10","h9","h8","h7","h6","h5","h4","h3","h2",
+          "cA","cQ","cK","cJ","c10","c9","c8","c7","c6","c5","c4","c3","c2",
+          "sA","sQ","sK","sJ","s10","s9","s8","s7","s6","s5","s4","s3","s2")
+  let randomCard = Math.floor(Math.random() * dealerDeck.length)
+  return randomCard
 }
 
-// Function to determine win, lose or tie
-// This needs to be ran after hitting the Stand button
-function checkWin (){
-  if (playerCount > 21){
-    return `BUST! You Lose!`
-  }else if (dealerCount > 21){
-    return `Dealer BUSTS! You Win!`
-  }else if (playerCount === 21 && playerCount > dealerCount){
-    return `BLACKJACK! You Win!`
-  }else if (playerCount > dealerCount){
-    return `You Win!`
-  }else if (dealerCount === 21 && dealerCount > playerCount){
-    return `Dealer got BLACKJACK! You Lose!`
-  }else if (dealerCount > playerCount){
-    return `You Lose!`
-  }else {
-    return `DRAW!`
-  }
-}
