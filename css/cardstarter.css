@@ -378,7 +378,45 @@ body {
   .card.E.shadow {
     box-shadow: -2px 2px 3px 0 rgba(41, 41, 41, 0.75); }
 
+#dealerHand{
+  display: flex;
+  margin: 100px 0 0 0;
+  overflow: visible;
+}
 
+#dealerHand>div:first-child{
+  overflow: visible;
+  margin-right: -70px;
+}
+
+#deck2{
+  margin-top: 30px;
+}
+
+#deckD{
+  display: flex;
+  margin: 0 0 0 400px;
+  overflow: visible;
+
+}
+
+
+
+
+#playerHand{
+  display: flex;
+ overflow: visible;
+
+}
+
+#playerHand>div:first-child{
+  overflow: visible;
+  margin-right: -70px;
+}
+
+#deck4{
+  margin-top: 30px;
+}
 
     @media only screen and (min-width: 600px) {
 

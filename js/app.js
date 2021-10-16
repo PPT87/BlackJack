@@ -19,18 +19,21 @@ let playerHand = []
 let dealerHand = []
 let playerCount = 0
 let dealerCount = 0
+let winner = false
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
+let homeBtn = document.getElementById('homeBtn')
+let lightDarkBtn = document.getElementById('lightDarkBtn')
 let deckDEl = document.getElementById('deckD')
 let deck1El = document.getElementById('deck1')
 let deck2El = document.getElementById('deck2')
 let deck3El = document.getElementById('deck3')
 let deck4El = document.getElementById('deck4')
-let homeBtn = document.getElementById('homeBtn')
-let lightDarkBtn = document.getElementById('lightDarkBtn')
 let dealBtn = document.getElementById('dealBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
+let messageEl = document.getElementById('message')
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -64,32 +67,26 @@ function init(){
   "hA","hQ","hK","hJ","h10","h09","h08","h07","h06","h05","h04","h03","h02",
   "cA","cQ","cK","cJ","c10","c09","c08","c07","c06","c05","c04","c03","c02",
   "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"
-]}
+]
 
-// Function to assign index values
-function cardValues(){
-  
+
+
 
 }
-
-
-
-
-
-function hit(){
-  // Function to handle a button click:
-  if(deckD.length > 0){
-    // Randomly select number (to be used as our index) from total cards remaining
-    let randCard = Math.floor(Math.random() * deckD.length)
-    console.log(randCard)
-    // Assign card with the random index to a variable
-    let cardPicked = deckD.splice(randCard, 1)
-    // Add card picked to deck 1
-    deck1.push(cardPicked)
-    // Pass card picked to render function to display
-    render(cardPicked)
+// Function to assign index values
+// How to handle Aces (1 or 11)
+function cardWeight(){
+  let cardValue = []
+  for (let i=0; i<deckD.length; i++){
+    if (i === "dQ"){
+      cardValue = 10
+    }
   }
 }
+
+
+
+
 
 function render(cardPicked) {
   // Removes outline class when first card is placed
@@ -114,8 +111,6 @@ function render(cardPicked) {
 	// Add current card picked to deck array
   deck1El.classList.add(cardPicked)
 
-
-
   // Remove card back color and add outline when last card of dealerD is picked
   if (deckD.length === 0) {  
     deckDEl.classList.remove("back-red");
@@ -123,7 +118,24 @@ function render(cardPicked) {
   }
 }
 
-function isWinner (){
+function hit(){
+  // Function to handle a button click:
+  if(deckD.length > 0){
+    // Randomly select number (to be used as our index) from total cards remaining
+    let randCard = Math.floor(Math.random() * deckD.length)
+    console.log(randCard)
+    // Assign card with the random index to a variable
+    let cardPicked = deckD.splice(randCard, 1)
+    // Add card picked to deck 1
+    deck1.push(cardPicked)
+    // Pass card picked to render function to display
+    render(cardPicked)
+  }
+}
+
+// Function to determine win, lose or tie
+// This needs to be ran after hitting the Stand button
+function checkWin (){
   if (playerCount > 21){
     return `BUST! You Lose!`
   }else if (dealerCount > 21){
