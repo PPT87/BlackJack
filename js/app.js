@@ -20,60 +20,36 @@ let pHandVal = []
 let dHandVal = [] 
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
-let homeBtn = document.getElementById('homeBtn')
 let lightDarkBtn = document.getElementById('lightDarkBtn')
-let dealerDeckEl = document.getElementById('dealerDeck')
-let deck1El = document.getElementById('deck1')
-let deck2El = document.getElementById('deck2')
-let deck3El = document.getElementById('deck3')
-let deck4El = document.getElementById('deck4')
 let playBtn = document.getElementById('playBtn')
 let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
-
-playBtn.setAttribute("hidden", false)
-hitBtn.setAttribute("hidden", true)
-standBtn.setAttribute("hidden", true)
-playAgainBtn.setAttribute("hidden", true)
+let playerCardsEl = document.getElementById('userCard0')
+let dealerCardsEl = document.getElementById('dealerCards')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 // Event listeners
-document.getElementById('hitBtn').addEventListener('click', () => {
-  console.log('hit button works')
-})
+document.getElementById('hitBtn').addEventListener('click', hitMe)
 
-document.getElementById('playAgainBtn').addEventListener('click', () => {
-  console.log('play again button works')
-})
+document.getElementById('playAgainBtn').addEventListener('click', gameStart)
 
-document.getElementById('standBtn').addEventListener('click', () => {
-  console.log('stand button works')
-})
-document.getElementById('homeBtn').addEventListener('click', () => { 
-console.log('home button works')
-})
+document.getElementById('standBtn').addEventListener('click', stand)
+
 document.getElementById('lightDarkBtn').addEventListener('click', () => {
 console.log('light/dark button works')
 })
 
-document.getElementById('playBtn').addEventListener('click', () => {
-  console.log('play button works')
-  })
-
 /*-------------------------------- Functions --------------------------------*/
-gameStart()
+//gameStart()
 
 //When PLAY button is clicked, everything is reset and cards are dealt. 
 function gameStart(){
   if (endRound === true){
     dealerTurn = false
     endRound = false
-    playBtn.setAttribute("hidden", true)
-    playAgainBtn.setAttribute("hidden", true)
-
   }
   // Empty player and dealer hands
   if (playerHand.length > 0){
@@ -88,8 +64,10 @@ function gameStart(){
     dealCard = getRandomCard() //get 1 random card
     dealerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
+
   }
-  //render()// displays deal and sums to Player and Dealer
+  playerHandCount()
+  dealerHandCount()
 }
 
 // get random card from dealerDeck
@@ -104,49 +82,99 @@ function getRandomCard() {
 }
 
 function playerHandCount(){
+  playerAceInHand()
   playerCount = 0
   playerAce = 0
   pHandVal.splice(0, pHandVal.length)
-  for (i=0; i<playerHand.length; i++) 
-    { let value = playerHand[i].charAt(0); if (value === "A") { pHandAces++ } else { pHandVal.push(value) 
+  for (i=0; i<playerHand.length; i++) {
+    let value = playerHand[i].charAt(1); if (value === "A"){
+      playerAce++
+    } 
+    else{ 
+      pHandVal.push(value) 
     } 
   }
+
   for (i=0; i<(pHandVal.length); i++) { 
     let value = pHandVal[i] 
     if (value === "1" || value === "J" || value === "Q" || value === "K") {
-        playerSum += 10 
+        playerCount += 10 
     } else { 
-        playerSum += parseInt(value) 
-    }
+        playerCount += parseInt(value) 
+    } 
 }
-if (pHandAces > 0) { //If there is an ace in the hand, run this logic
-  if ((playerCount + 11 + (pHandAces-1))>21){ 
-      playerCount += pHandAces 
-      playerCount += 11 + (pHandAces-1)
+ 
+console.log('playerhand', playerHand)
+console.log('playercount',playerCount)
   }
-}
+
+  function playerAceInHand(){//If there is an ace in the hand
+    if (playerAce > 0) { 
+      if ((playerCount + 11 + (playerAce-1))>21){ 
+          playerCount += playerAce 
+          playerCount += 11 + (playerAce-1)
+      }
+  }
   }
 
   function dealerHandCount(){
+    dealerAceInHand()
     dealerFinalCount = 0
     dealerAce = 0
     dHandVal.splice(0, dHandVal.length)
-    for (i=0; i<dHandVal.length; i++) 
-      { let value = dHandVal[i].charAt(0); if (value === "A") { dealerAce++ } else { dHandVal.push(value) 
+    for (i=0; i<dealerHand.length; i++) {
+      let value = dealerHand[i].charAt(1); if (value === "A"){
+        dealerAce++
+      } 
+      else{ 
+        dHandVal.push(value) 
       } 
     }
+    
     for (i=0; i<(dHandVal.length); i++) { 
       let value = dHandVal[i] 
       if (value === "1" || value === "J" || value === "Q" || value === "K") {
           dealerFinalCount += 10 
-      } else { 
+      } 
+      else { 
           dealerFinalCount += parseInt(value) 
-      }
+      } 
   }
-  if (dHandAces > 0) { //If there is an ace in the hand, run this logic
-    if ((dealerFinalCount + 11 + (dHandAces-1))>21){ 
-        dealerFinalCount += dHandAces 
-        dealerFinalCount += 11 + (dHandAces-1)
+  console.log('dealerhand', dealerHand)
+  console.log('dealercount',dealerFinalCount)
     }
+  
+    function dealerAceInHand(){//If there is an ace in the hand
+      if (dealerAce > 0) { 
+        if ((dealerFinalCount + 11 + (playerAce-1))>21){ 
+            dealerFinalCount += dealerAce 
+            dealerFinalCount += 11 + (dealerAce-1)
+        }
+    }
+    }
+
+function hitMe(){
+  if (endRound === false){
+    randomCard = getRandomCard()
+    playerHand.push(dealerDeck[randomCard])
+    dealerDeck.splice(randomCard, 1)
   }
+  playerHandCount()
+  console.log('playerhithand', playerHand, playerCount)
+}
+
+function stand(){
+  if (endRound === false){
+    dealerTurn = true
+    if (dealerFinalCount < 16){
+      randomCard = getRandomCard()
+      dealerHand.push(dealerDeck[randomCard])
+      dealerDeck.splice(randomCard, 1)
     }
+    else{
+      endRound = true
+    } console.log(`standfunction`, dealerHand)
+  }
+dealerHandCount()
+console.log(`finalstand`, dealerHand, dealerFinalCount)
+}
