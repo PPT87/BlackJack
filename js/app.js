@@ -14,11 +14,15 @@ let dealerTurn = false
 let endRound = true
 let dealCard = 0
 let message = ''
+let playerAce = 0
+let dealerAce = 0
+let pHandVal = [] 
+let dHandVal = [] 
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
 let homeBtn = document.getElementById('homeBtn')
 let lightDarkBtn = document.getElementById('lightDarkBtn')
-let deckDEl = document.getElementById('deckD')
+let dealerDeckEl = document.getElementById('dealerDeck')
 let deck1El = document.getElementById('deck1')
 let deck2El = document.getElementById('deck2')
 let deck3El = document.getElementById('deck3')
@@ -41,7 +45,7 @@ document.getElementById('hitBtn').addEventListener('click', () => {
   console.log('hit button works')
 })
 
-document.getElementById('playAgainBtn').addEventListener('click', () => { 
+document.getElementById('playAgainBtn').addEventListener('click', () => {
   console.log('play again button works')
 })
 
@@ -55,8 +59,9 @@ document.getElementById('lightDarkBtn').addEventListener('click', () => {
 console.log('light/dark button works')
 })
 
-document.getElementById('playBtn').addEventListener('click', gameStart)
-
+document.getElementById('playBtn').addEventListener('click', () => {
+  console.log('play button works')
+  })
 
 /*-------------------------------- Functions --------------------------------*/
 gameStart()
@@ -68,7 +73,7 @@ function gameStart(){
     endRound = false
     playBtn.setAttribute("hidden", true)
     playAgainBtn.setAttribute("hidden", true)
-    
+
   }
   // Empty player and dealer hands
   if (playerHand.length > 0){
@@ -98,3 +103,50 @@ function getRandomCard() {
   return randomCard
 }
 
+function playerHandCount(){
+  playerCount = 0
+  playerAce = 0
+  pHandVal.splice(0, pHandVal.length)
+  for (i=0; i<playerHand.length; i++) 
+    { let value = playerHand[i].charAt(0); if (value === "A") { pHandAces++ } else { pHandVal.push(value) 
+    } 
+  }
+  for (i=0; i<(pHandVal.length); i++) { 
+    let value = pHandVal[i] 
+    if (value === "1" || value === "J" || value === "Q" || value === "K") {
+        playerSum += 10 
+    } else { 
+        playerSum += parseInt(value) 
+    }
+}
+if (pHandAces > 0) { //If there is an ace in the hand, run this logic
+  if ((playerCount + 11 + (pHandAces-1))>21){ 
+      playerCount += pHandAces 
+      playerCount += 11 + (pHandAces-1)
+  }
+}
+  }
+
+  function dealerHandCount(){
+    dealerFinalCount = 0
+    dealerAce = 0
+    dHandVal.splice(0, dHandVal.length)
+    for (i=0; i<dHandVal.length; i++) 
+      { let value = dHandVal[i].charAt(0); if (value === "A") { dealerAce++ } else { dHandVal.push(value) 
+      } 
+    }
+    for (i=0; i<(dHandVal.length); i++) { 
+      let value = dHandVal[i] 
+      if (value === "1" || value === "J" || value === "Q" || value === "K") {
+          dealerFinalCount += 10 
+      } else { 
+          dealerFinalCount += parseInt(value) 
+      }
+  }
+  if (dHandAces > 0) { //If there is an ace in the hand, run this logic
+    if ((dealerFinalCount + 11 + (dHandAces-1))>21){ 
+        dealerFinalCount += dHandAces 
+        dealerFinalCount += 11 + (dHandAces-1)
+    }
+  }
+    }
