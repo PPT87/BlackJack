@@ -20,7 +20,7 @@ let dHandVal = []
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
 let lightDarkBtn = document.getElementById('lightDarkBtn')
-let playBtn = document.getElementById('playBtn')
+let dealBtn = document.getElementById('dealBtn')
 let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
@@ -29,39 +29,46 @@ let pCard1 = document.getElementById('pCard1')
 let pCard2 = document.getElementById('pCard2')
 let dCard1 = document.getElementById('dCard1')
 let Card2 = document.getElementById('dCard2')
-let pTotal = document.getElementById('pTotal')
-let dTotal = document.getElementById('dTotal')
+let pTotalEl = document.getElementById('pTotal')
+let dTotalEl = document.getElementById('dTotal')
 
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 // Event listeners
-document.getElementById('hitBtn').addEventListener('click', hitMe)
+document.getElementById('dealBtn').addEventListener('click', gameStart)
 
 document.getElementById('playAgainBtn').addEventListener('click', gameStart)
 
+document.getElementById('hitBtn').addEventListener('click', hitMe)
 
 document.getElementById('standBtn').addEventListener('click', stand)
+
+
 
 document.getElementById('lightDarkBtn').addEventListener('click', () => {
 console.log('light/dark button works')
 })
 
 /*-------------------------------- Functions --------------------------------*/
-//gameStart()
-
 //When PLAY button is clicked, everything is reset and cards are dealt. 
 function gameStart(){
   if (endRound === true){
-    playAgainBtn.setAttribute("hidden", true)
     dealerTurn = false
     endRound = false
+    playAgainBtn.setAttribute("hidden", true)
+    dealBtn.setAttribute("hidden", true)
+    hitBtn.removeAttribute("hidden", true)
+    standBtn.removeAttribute("hidden", true)
   }
   // Empty player and dealer hands
   if (playerHand.length > 0){
     playerHand.splice(0, playerHand.length)
     dealerHand.splice(0, dealerHand.length)
-  }  
+  }
+  pInitialDeal()
+  dInitialDeal()
+
   }
 
   // Deal out initial cards to player
@@ -70,9 +77,8 @@ function pInitialDeal(){
     dealCard = getRandomCard() // get 1 random card
     playerHand.push(dealerDeck[dealCard]) // push random card to player hand. 
     dealerDeck.splice(dealCard, 1)// remove random card from the deck
-    return playerHand
 }
-
+playerHandCount()
 }
 
 // Deal out initial cards to dealer
@@ -81,8 +87,8 @@ function dInitialDeal(){
     dealCard = getRandomCard() //get 1 random card
     dealerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
-    return dealerHand
 }
+dealerHandCount()
 }
 
 
@@ -126,7 +132,9 @@ function playerHandCount(){
             playerCount += 11 + (playerAce-1)
           }
       }
-    }
+    } 
+    console.log(`player`, playerHand, playerCount)
+    pTotalEl.innerText = `Total: ${playerCount}`
   }
 
   //  Get total of dealer hand
@@ -160,6 +168,8 @@ function playerHandCount(){
         }
     } 
     }
+    console.log(`dealer`, dealerHand, dealerFinalCount)
+    dTotalEl.innerText = `Total: ${dealerFinalCount}`
   }
 
 // Pushes randomCard into players hand and removes card of dealerDeck
@@ -169,6 +179,8 @@ function hitMe(){
     playerHand.push(dealerDeck[randomCard])
     dealerDeck.splice(randomCard, 1)
   } 
+  getRandomCard()
+  playerHandCount()
 }
 
 // If dealer is <=16, draw card
@@ -184,19 +196,28 @@ function stand(){
       endRound = true
     }
   }
+  dealerHandCount()
+  compareHands()
+  playAgainBtn.removeAttribute("hidden", true)
 }
 
 // Determines if you're a winner, loser or tie game. 
 function compareHands(){
   if (endRound === true){
     if (playerHandCount > dealerFinalCount){
-      return messageEl.innerText = `You Win!`
+      messageEl.innerText = `You Win!`
+      endRound = true
+      return
     } 
     else if (playerHandCount < dealerFinalCount){
-      return messageEl.innerText = `You Lose!`
+      messageEl.innerText = `You Lose!`
+      endRound = true
+      return
     }
     else if (playerHandCount === dealerFinalCount){
-      return messageEl.innerText = `It's a Tie!`
+      messageEl.innerText = `It's a Tie!`
+      endRound = true
+      return
     }
     playAgainBtn.setAttribute("visible", true)
   }

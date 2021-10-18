@@ -3,38 +3,7 @@ body {
 	background-color: #c5b3b3;
 }
 
-#id {
-	color: inherit;
-}
 
-.ninja {
-	display: none;
-}
-
-.game {
-	width: 720px;
-	border: solid 1px #ddd;
-	margin: 0 auto;
-	background: #007e23;
-	border: solid 10px;
-	text-align: center;
-	min-height: 430px;
-	font-size: 1.5em;
-}
-
-.btn {
-	border: none;
-	padding: 15px 30px;
-	border-radius: 10px;
-	cursor: pointer;
-	background: #222;
-	color: white !important;
-	font-size: 1em;
-}
-
-.btn:hover {
-	background: #004910;
-}
 
 .game h3 {
 	padding: 10px;
