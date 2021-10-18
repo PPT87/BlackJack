@@ -13,7 +13,6 @@ let dealerFinalCount = 0
 let dealerTurn = false
 let endRound = true
 let dealCard = 0
-let message = ''
 let playerAce = 0
 let dealerAce = 0
 let pHandVal = [] 
@@ -30,6 +29,8 @@ let pCard1 = document.getElementById('pCard1')
 let pCard2 = document.getElementById('pCard2')
 let dCard1 = document.getElementById('dCard1')
 let Card2 = document.getElementById('dCard2')
+let pTotal = document.getElementById('pTotal')
+let dTotal = document.getElementById('dTotal')
 
 
 
@@ -52,6 +53,7 @@ console.log('light/dark button works')
 //When PLAY button is clicked, everything is reset and cards are dealt. 
 function gameStart(){
   if (endRound === true){
+    playAgainBtn.setAttribute("hidden", true)
     dealerTurn = false
     endRound = false
   }
@@ -70,6 +72,7 @@ function pInitialDeal(){
     dealerDeck.splice(dealCard, 1)// remove random card from the deck
     return playerHand
 }
+
 }
 
 // Deal out initial cards to dealer
@@ -111,20 +114,19 @@ function playerHandCount(){
     let value = pHandVal[i] 
     if (value === "1" || value === "J" || value === "Q" || value === "K") {
         playerCount += 10 
-    } else { 
-        playerCount += parseInt(value) 
     } 
-}console.log(playerHand, playerCount)
-  }
-
-  //If there is an ace in the hand
-  function playerAceInHand(){
-    if (playerAce > 0) { 
-      if ((playerCount + 11 + (playerAce-1))>21){ 
-          playerCount += playerAce 
-          playerCount += 11 + (playerAce-1)
+    else{ 
+        playerCount += parseInt(value) 
+      } 
+      if (playerAce > 0) { 
+        if ((playerCount + 11 + (playerAce - 1)) > 21){ // If one of the aces (if more than 1) being 11 will put the total over 21
+            playerCount += playerAce //if it does, only add playerCount to the number of aces in hand.
+          }
+          else{ // if the ace being 11 doesn't got over 21, add 11 plus the number of aces minus 1 (the one you made 11)
+            playerCount += 11 + (playerAce-1)
+          }
       }
-  }
+    }
   }
 
   //  Get total of dealer hand
@@ -148,19 +150,17 @@ function playerHandCount(){
       } 
       else { 
           dealerFinalCount += parseInt(value) 
-      } 
-  }
-    }
-    
-  //If there is an ace in the hand
-    function dealerAceInHand(){
+      }
       if (dealerAce > 0) { 
-        if ((dealerFinalCount + 11 + (playerAce-1))>21){ 
-            dealerFinalCount += dealerAce 
-            dealerFinalCount += 11 + (dealerAce-1)
+        if ((dealerFinalCount + 11 + (dealerAce - 1)) > 21){ // Check to see if one of the aces being 11 will put the total over 21
+            dealerFinalCount += dealerAce //if it does, only add the total number of aces to the total
         }
+        else{ // if the ace being 11 doesn't got over 21, add 11 plus the number of aces minus 1 (the one you made 11)
+          dealerFinalCount += 11 + (dealerAce - 1)
+        }
+    } 
     }
-    }
+  }
 
 // Pushes randomCard into players hand and removes card of dealerDeck
 function hitMe(){
@@ -188,14 +188,17 @@ function stand(){
 
 // Determines if you're a winner, loser or tie game. 
 function compareHands(){
-  if (playerHandCount > dealerFinalCount){
-    return messageEl.innerText = `You Win!`
-  } 
-  else if (playerHandCount < dealerFinalCount){
-    return messageEl.innerText = `You Lose!`
-  }
-  else{
-    return messageEl.innerText = `It's a Tie!`
+  if (endRound === true){
+    if (playerHandCount > dealerFinalCount){
+      return messageEl.innerText = `You Win!`
+    } 
+    else if (playerHandCount < dealerFinalCount){
+      return messageEl.innerText = `You Lose!`
+    }
+    else if (playerHandCount === dealerFinalCount){
+      return messageEl.innerText = `It's a Tie!`
+    }
+    playAgainBtn.setAttribute("visible", true)
   }
 }
 
