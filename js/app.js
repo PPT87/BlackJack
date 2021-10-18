@@ -146,7 +146,7 @@ function playerHandCount(){
         return
       }
     }
-    // console.log(`player`, playerHand, playerCount)
+    console.log(`player`, playerHand, playerCount)
     pTotalEl.innerText = `Total: ${playerCount}` 
     
   }

@@ -1,0 +1,388 @@
+html {
+  box-sizing: border-box
+}
+
+/* The Universal Selector */
+*, /* All elements*/
+*::before, /* All ::before pseudo-elements */
+*::after { /* All ::after pseudo-elements */
+  /* height & width will now include border & padding by default
+     but can be over-ridden as needed */
+  box-sizing: inherit;
+}
+
+/* resets font size to be 62.5% of the user preference - 
+   in most browser configurations this will be 10px */
+:root {
+  font-size: 62.5%
+}
+
+body {
+  background-color: lightgray;
+/* Use a system font, if none are available use an available sans-sarif   font */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+
+@charset "UTF-8";
+.card {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 5px 5px 50px 5px;
+  cursor: pointer;
+  /* Set the card's dimensions, and size it relative to
+     it's font size. */
+  font-size: inherit;
+  width: 4.0em;
+  height: 5.5em;
+  /* Add a default background color and border. */
+  background-color: #fff;
+  border-radius: 0.20em;
+  border: 1px solid #c3c3c3;
+  /* Scale and set the background settings. */
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  /* "Hide" any text within the element (use text to be
+     simply compliant with screen readers, etc.). */
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  /* Default sizes for cards (size based off the font). */
+  /* Optional styles for cards: borderless and drop shadow. */
+  /* Not a card, but a card-shaped outline to represent a
+     droppable place, like an empty pile. */ }
+  .card.small {
+    font-size: 12px; }
+  .card.large {
+    font-size: 26px; }
+  .card.xlarge {
+    font-size: 42px; }
+  .card.no-border {
+    border: 0; }
+  .card.shadow {
+    box-shadow: 2px 2px 3px 0 rgba(41, 41, 41, 0.75); }
+  .card.outline {
+    background-image: none;
+    background-color: rgba(195, 195, 195, 0.5);
+    border: 0.15em dashed #daa520; }
+
+.card.diamonds.A,
+.card.dA,
+.card.♦A {
+  background-image: url("images/dA.svg"); }
+
+.card.diamonds.K,
+.card.dK,
+.card.♦K {
+  background-image: url("images/dK.svg"); }
+
+.card.diamonds.Q,
+.card.dQ,
+.card.♦Q {
+  background-image: url("images/dQ.svg"); }
+
+.card.diamonds.J,
+.card.dJ,
+.card.♦J {
+  background-image: url("images/dJ.svg"); }
+
+.card.diamonds.r10,
+.card.d10,
+.card.♦10 {
+  background-image: url("images/d10.svg"); }
+
+.card.diamonds.r9,
+.card.d09,
+.card.♦09 {
+  background-image: url("images/d9.svg"); }
+
+.card.diamonds.r8,
+.card.d08,
+.card.♦08 {
+  background-image: url("images/d8.svg"); }
+
+.card.diamonds.r7,
+.card.d07,
+.card.♦07 {
+  background-image: url("images/d7.svg"); }
+
+.card.diamonds.r6,
+.card.d06,
+.card.♦06 {
+  background-image: url("images/d6.svg"); }
+
+.card.diamonds.r5,
+.card.d05,
+.card.♦05 {
+  background-image: url("images/d5.svg"); }
+
+.card.diamonds.r4,
+.card.d04,
+.card.♦04 {
+  background-image: url("images/d4.svg"); }
+
+.card.diamonds.r3,
+.card.d03,
+.card.♦03 {
+  background-image: url("images/d3.svg"); }
+
+.card.diamonds.r2,
+.card.d02,
+.card.♦02 {
+  background-image: url("images/d2.svg"); }
+
+.card.hearts.A,
+.card.hA,
+.card.♥A {
+  background-image: url("images/hA.svg"); }
+
+.card.hearts.K,
+.card.hK,
+.card.♥K {
+  background-image: url("images/hK.svg"); }
+
+.card.hearts.Q,
+.card.hQ,
+.card.♥Q {
+  background-image: url("images/hQ.svg"); }
+
+.card.hearts.J,
+.card.hJ,
+.card.♥J {
+  background-image: url("images/hJ.svg"); }
+
+.card.hearts.r10,
+.card.h10,
+.card.♥10 {
+  background-image: url("images/h10.svg"); }
+
+.card.hearts.r9,
+.card.h09,
+.card.♥09 {
+  background-image: url("images/h9.svg"); }
+
+.card.hearts.r8,
+.card.h08,
+.card.♥08 {
+  background-image: url("images/h8.svg"); }
+
+.card.hearts.r7,
+.card.h07,
+.card.♥07 {
+  background-image: url("images/h7.svg"); }
+
+.card.hearts.r6,
+.card.h06,
+.card.♥06 {
+  background-image: url("images/h6.svg"); }
+
+.card.hearts.r5,
+.card.h05,
+.card.♥05 {
+  background-image: url("images/h5.svg"); }
+
+.card.hearts.r4,
+.card.h04,
+.card.♥04 {
+  background-image: url("images/h4.svg"); }
+
+.card.hearts.r3,
+.card.h03,
+.card.♥03 {
+  background-image: url("images/h3.svg"); }
+
+.card.hearts.r2,
+.card.h02,
+.card.♥02 {
+  background-image: url("images/h2.svg"); }
+
+.card.spades.A,
+.card.sA,
+.card.♠A {
+  background-image: url("images/sA.svg"); }
+
+.card.spades.K,
+.card.sK,
+.card.♠K {
+  background-image: url("images/sK.svg"); }
+
+.card.spades.Q,
+.card.sQ,
+.card.♠Q {
+  background-image: url("images/sQ.svg"); }
+
+.card.spades.J,
+.card.sJ,
+.card.♠J {
+  background-image: url("images/sJ.svg"); }
+
+.card.spades.r10,
+.card.s10,
+.card.♠10 {
+  background-image: url("images/s10.svg"); }
+
+.card.spades.r9,
+.card.s09,
+.card.♠09 {
+  background-image: url("images/s9.svg"); }
+
+.card.spades.r8,
+.card.s08,
+.card.♠08 {
+  background-image: url("images/s8.svg"); }
+
+.card.spades.r7,
+.card.s07,
+.card.♠07 {
+  background-image: url("images/s7.svg"); }
+
+.card.spades.r6,
+.card.s06,
+.card.♠06 {
+  background-image: url("images/s6.svg"); }
+
+.card.spades.r5,
+.card.s05,
+.card.♠05 {
+  background-image: url("images/s5.svg"); }
+
+.card.spades.r4,
+.card.s04,
+.card.♠04 {
+  background-image: url("images/s4.svg"); }
+
+.card.spades.r3,
+.card.s03,
+.card.♠03 {
+  background-image: url("images/s3.svg"); }
+
+.card.spades.r2,
+.card.s02,
+.card.♠02 {
+  background-image: url("images/s2.svg"); }
+
+.card.clubs.A,
+.card.cA,
+.card.♣A {
+  background-image: url("images/cA.svg"); }
+
+.card.clubs.K,
+.card.cK,
+.card.♣K {
+  background-image: url("images/cK.svg"); }
+
+.card.clubs.Q,
+.card.cQ,
+.card.♣Q {
+  background-image: url("images/cQ.svg"); }
+
+.card.clubs.J,
+.card.cJ,
+.card.♣J {
+  background-image: url("images/cJ.svg"); }
+
+.card.clubs.r10,
+.card.c10,
+.card.♣10 {
+  background-image: url("images/c10.svg"); }
+
+.card.clubs.r9,
+.card.c09,
+.card.♣09 {
+  background-image: url("images/c9.svg"); }
+
+.card.clubs.r8,
+.card.c08,
+.card.♣08 {
+  background-image: url("images/c8.svg"); }
+
+.card.clubs.r7,
+.card.c07,
+.card.♣07 {
+  background-image: url("images/c7.svg"); }
+
+.card.clubs.r6,
+.card.c06,
+.card.♣06 {
+  background-image: url("images/c6.svg"); }
+
+.card.clubs.r5,
+.card.c05,
+.card.♣05 {
+  background-image: url("images/c5.svg"); }
+
+.card.clubs.r4,
+.card.c04,
+.card.♣04 {
+  background-image: url("images/c4.svg"); }
+
+.card.clubs.r3,
+.card.c03,
+.card.♣03 {
+  background-image: url("images/c3.svg"); }
+
+.card.clubs.r2,
+.card.c02,
+.card.♣02 {
+  background-image: url("images/c2.svg"); }
+
+
+.card.back-blue {
+  background-image: url("images/blue.svg"); }
+
+
+/* Re-orients the cards for different directions. While
+   they are symmetric, it's still important to orient
+   them correctly in case text or other symbols are
+   layered on them with CSS pseudo-selectors, new
+   classes/rules, etc. */
+.card.west,
+.card.W {
+  transform: rotate(90deg);
+  margin: auto 0.75em; }
+  .card.west.shadow,
+  .card.W.shadow {
+    box-shadow: 2px -2px 3px 0 rgba(41, 41, 41, 0.75); }
+
+.card.north,
+.card.N {
+  transform: rotate(180deg); }
+  .card.north.shadow,
+  .card.N.shadow {
+    box-shadow: -2px -2px 3px 0 rgba(41, 41, 41, 0.75); }
+
+.card.east,
+.card.E {
+  transform: rotate(270deg);
+  margin: auto 0.75em; }
+  .card.east.shadow,
+  .card.E.shadow {
+    box-shadow: -2px 2px 3px 0 rgba(41, 41, 41, 0.75); }
+
+
+
+    @media only screen and (min-width: 600px) {
+
+      main{
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto auto auto auto;
+        justify-content: center;
+        align-items: center;
+      
+        grid-template-areas: 
+        "home lightDark"
+        "dealer"
+        "player"
+        "button button button"
+        }
+      
+      }
