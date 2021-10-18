@@ -26,8 +26,11 @@ let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
-let playerCardsEl = document.getElementById('userCard0')
-let dealerCardsEl = document.getElementById('dealerCards')
+let pCard1 = document.getElementById('pCard1')
+let pCard2 = document.getElementById('pCard2')
+let dCard1 = document.getElementById('dCard1')
+let Card2 = document.getElementById('dCard2')
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -35,6 +38,7 @@ let dealerCardsEl = document.getElementById('dealerCards')
 document.getElementById('hitBtn').addEventListener('click', hitMe)
 
 document.getElementById('playAgainBtn').addEventListener('click', gameStart)
+
 
 document.getElementById('standBtn').addEventListener('click', stand)
 
@@ -55,20 +59,29 @@ function gameStart(){
   if (playerHand.length > 0){
     playerHand.splice(0, playerHand.length)
     dealerHand.splice(0, dealerHand.length)
+  }  
   }
-  // Deal out initial cards.
+
+  // Deal out initial cards to player
+function pInitialDeal(){
   for (let i=0; i<2; i++){ //loops 2 times to deal out 2 cards
     dealCard = getRandomCard() // get 1 random card
     playerHand.push(dealerDeck[dealCard]) // push random card to player hand. 
     dealerDeck.splice(dealCard, 1)// remove random card from the deck
+    return playerHand
+}
+}
+
+// Deal out initial cards to dealer
+function dInitialDeal(){
+  for (let i=0; i<2; i++){ //loops 2 times to deal out 2 cards
     dealCard = getRandomCard() //get 1 random card
     dealerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
-
-  }
-  playerHandCount()
-  dealerHandCount()
+    return dealerHand
 }
+}
+
 
 // get random card from dealerDeck
 function getRandomCard() {
@@ -81,8 +94,8 @@ function getRandomCard() {
   return randomCard
 }
 
+// Get total of player hand
 function playerHandCount(){
-  playerAceInHand()
   playerCount = 0
   playerAce = 0
   pHandVal.splice(0, pHandVal.length)
@@ -94,7 +107,6 @@ function playerHandCount(){
       pHandVal.push(value) 
     } 
   }
-
   for (i=0; i<(pHandVal.length); i++) { 
     let value = pHandVal[i] 
     if (value === "1" || value === "J" || value === "Q" || value === "K") {
@@ -102,13 +114,11 @@ function playerHandCount(){
     } else { 
         playerCount += parseInt(value) 
     } 
-}
- 
-console.log('playerhand', playerHand)
-console.log('playercount',playerCount)
+}console.log(playerHand, playerCount)
   }
 
-  function playerAceInHand(){//If there is an ace in the hand
+  //If there is an ace in the hand
+  function playerAceInHand(){
     if (playerAce > 0) { 
       if ((playerCount + 11 + (playerAce-1))>21){ 
           playerCount += playerAce 
@@ -117,8 +127,8 @@ console.log('playercount',playerCount)
   }
   }
 
+  //  Get total of dealer hand
   function dealerHandCount(){
-    dealerAceInHand()
     dealerFinalCount = 0
     dealerAce = 0
     dHandVal.splice(0, dHandVal.length)
@@ -140,11 +150,10 @@ console.log('playercount',playerCount)
           dealerFinalCount += parseInt(value) 
       } 
   }
-  console.log('dealerhand', dealerHand)
-  console.log('dealercount',dealerFinalCount)
     }
-  
-    function dealerAceInHand(){//If there is an ace in the hand
+    
+  //If there is an ace in the hand
+    function dealerAceInHand(){
       if (dealerAce > 0) { 
         if ((dealerFinalCount + 11 + (playerAce-1))>21){ 
             dealerFinalCount += dealerAce 
@@ -153,28 +162,40 @@ console.log('playercount',playerCount)
     }
     }
 
+// Pushes randomCard into players hand and removes card of dealerDeck
 function hitMe(){
   if (endRound === false){
     randomCard = getRandomCard()
     playerHand.push(dealerDeck[randomCard])
     dealerDeck.splice(randomCard, 1)
-  }
-  playerHandCount()
-  console.log('playerhithand', playerHand, playerCount)
+  } 
 }
 
+// If dealer is <=16, draw card
 function stand(){
   if (endRound === false){
     dealerTurn = true
-    if (dealerFinalCount < 16){
+    if (dealerFinalCount <= 16){
       randomCard = getRandomCard()
       dealerHand.push(dealerDeck[randomCard])
       dealerDeck.splice(randomCard, 1)
     }
     else{
       endRound = true
-    } console.log(`standfunction`, dealerHand)
+    }
   }
-dealerHandCount()
-console.log(`finalstand`, dealerHand, dealerFinalCount)
 }
+
+// Determines if you're a winner, loser or tie game. 
+function compareHands(){
+  if (playerHandCount > dealerFinalCount){
+    return messageEl.innerText = `You Win!`
+  } 
+  else if (playerHandCount < dealerFinalCount){
+    return messageEl.innerText = `You Lose!`
+  }
+  else{
+    return messageEl.innerText = `It's a Tie!`
+  }
+}
+
