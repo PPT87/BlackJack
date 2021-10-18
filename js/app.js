@@ -41,12 +41,12 @@ document.getElementById('homeBtn').addEventListener('click', home)
 
 document.getElementById('dealBtn').addEventListener('click', gameStart)
 
+
 document.getElementById('playAgainBtn').addEventListener('click', gameStart)
 
 document.getElementById('hitBtn').addEventListener('click', hitMe)
 
 document.getElementById('standBtn').addEventListener('click', stand)
-
 
 
 document.getElementById('lightDarkBtn').addEventListener('click', () => {
@@ -84,7 +84,6 @@ function pInitialDeal(){
     dealerDeck.splice(dealCard, 1)// remove random card from the deck
 }
 playerHandCount()
-
 }
 
 // Deal out initial cards to dealer
@@ -94,6 +93,7 @@ function dInitialDeal(){
     dealerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
 }
+
 dealerHandCount()
 }
 
@@ -146,8 +146,9 @@ function playerHandCount(){
         return
       }
     }
-    console.log(`player`, playerHand, playerCount)
+    // console.log(`player`, playerHand, playerCount)
     pTotalEl.innerText = `Total: ${playerCount}` 
+    
   }
 
   //  Get total of dealer hand
@@ -202,7 +203,7 @@ function hitMe(){
   playerHandCount()
 }
 
-// If dealer is <=16, draw card
+// If dealer is < player, draw card
 function stand(){
   if (endRound === false){
     dealerTurn = true
@@ -218,7 +219,6 @@ function stand(){
   dealerHandCount()
   compareHands()
   playAgainBtn.removeAttribute("hidden", true)
-  
 }
 
 // Determines if you're a winner, loser or tie game. 
