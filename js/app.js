@@ -24,10 +24,10 @@ let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
-let pCard1El = document.getElementById('pCard1')
-let pCard2El = document.getElementById('pCard2')
-let dCard1El = document.getElementById('dCard1')
-let dCard2El = document.getElementById('dCard2')
+let pCard1El = document.getElementById('pCard1El')
+let pCard2El = document.getElementById('pCard2El')
+let dCard1El = document.getElementById('dCard1El')
+let dCard2El = document.getElementById('dCard2El')
 let pTotalEl = document.getElementById('pTotal')
 let dTotalEl = document.getElementById('dTotal')
 
@@ -77,8 +77,8 @@ function pInitialDeal(){
     playerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
 }
-  
   playerHandCount()
+  pCard1El.classList.add((dealerDeck[dealCard]))
 }
 
 // Deal out initial cards to dealer
@@ -174,12 +174,6 @@ function playerHandCount(){
           dealerFinalCount += 11 + (dealerAce - 1)
         }
       }
-      //   if (dealerFinalCount > 21){
-      //   playAgainBtn.removeAttribute("hidden", true)
-      //   messageEl.innerText = `Dealer BUST! You Win!`
-      //   dTotalEl.innerText = `Total: ${dealerFinalCount}`
-      //   return
-      // }
     }
     console.log(`dealer`, dealerHand, dealerFinalCount)
     dTotalEl.innerText = `Total: ${dealerFinalCount}`
@@ -194,14 +188,13 @@ function hitMe(){
   console.log(`playerhit`, playerHand)
 }
 
-
-// If dealer is < player, draw card
+// Dealer will draw a card while the dealer count is <21.
 function stand(){
-  while (dealerFinalCount <= 21){
-      if(dealerFinalCount >= playerCount){
+  while (dealerFinalCount < 21){ // while the dealer is <21 it will continue to draw a card
+      if(dealerFinalCount >= playerCount){ // if the dealer count >= the player count. break out of the loop
         break 
       }
-      else{      
+      else{ // computer will draw until it meets the if statement
         randomCard = getRandomCard()
         dealerHand.push(dealerDeck[randomCard])
         dealerDeck.splice(randomCard, 1)
