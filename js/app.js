@@ -26,6 +26,7 @@ let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
 let pCard1El = document.getElementById('pCard1El')
 let pCard2El = document.getElementById('pCard2El')
+let pCardEl = document.getElementById('pCardEl')
 let dCard1El = document.getElementById('dCard1El')
 let dCard2El = document.getElementById('dCard2El')
 let pTotalEl = document.getElementById('pTotal')
@@ -60,6 +61,10 @@ function gameStart(){
     dealBtn.setAttribute("hidden", true)
     hitBtn.removeAttribute("hidden", true)
     standBtn.removeAttribute("hidden", true)
+    pCard1El.classList.remove(playerHand[0])
+    pCard2El.classList.remove(playerHand[1])
+    dCard1El.classList.remove(dealerHand[0])
+    dCard2El.classList.remove(dealerHand[1])
   
   // Empty player and dealer hands
   if (playerHand.length > 0){
@@ -78,7 +83,8 @@ function pInitialDeal(){
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
 }
   playerHandCount()
-  pCard1El.classList.add((dealerDeck[dealCard]))
+  pCard1El.classList.add(playerHand[0])
+  pCard2El.classList.add(playerHand[1])
 }
 
 // Deal out initial cards to dealer
@@ -89,6 +95,8 @@ function dInitialDeal(){
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
 }
 dealerHandCount()
+dCard1El.classList.add(dealerHand[0])
+dCard2El.classList.add(dealerHand[1])
 }
 
 
@@ -184,6 +192,7 @@ function hitMe(){
   randomCard = getRandomCard()
   playerHand.push(dealerDeck[randomCard])
   dealerDeck.splice(randomCard, 1)
+  pCardEl.classList.add(playerHand)
   playerHandCount()
   console.log(`playerhit`, playerHand)
 }
