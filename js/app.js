@@ -24,10 +24,10 @@ let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
-let pCard1 = document.getElementById('pCard1')
-let pCard2 = document.getElementById('pCard2')
-let dCard1 = document.getElementById('dCard1')
-let Card2 = document.getElementById('dCard2')
+let pCard1El = document.getElementById('pCard1')
+let pCard2El = document.getElementById('pCard2')
+let dCard1El = document.getElementById('dCard1')
+let dCard2El = document.getElementById('dCard2')
 let pTotalEl = document.getElementById('pTotal')
 let dTotalEl = document.getElementById('dTotal')
 
@@ -38,7 +38,6 @@ let dTotalEl = document.getElementById('dTotal')
 document.getElementById('homeBtn').addEventListener('click', home)
 
 document.getElementById('dealBtn').addEventListener('click', gameStart)
-
 
 document.getElementById('playAgainBtn').addEventListener('click', gameStart)
 
@@ -78,6 +77,7 @@ function pInitialDeal(){
     playerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
 }
+  
   playerHandCount()
 }
 
@@ -196,35 +196,43 @@ function hitMe(){
 
 // If dealer is < player, draw card
 function stand(){
-    if (dealerFinalCount < playerCount){
-      randomCard = getRandomCard()
-      dealerHand.push(dealerDeck[randomCard])
-      dealerDeck.splice(randomCard, 1)
-    }
-    else{
-      endRound = true
-    }
-    dealerHandCount()
+  console.log (dealerHand)
+  while (dealerFinalCount <= 21){
+    console.log(dealerFinalCount, playerCount)
+    // if (dealerFinalCount < playerCount){
+      if(dealerFinalCount >= playerCount){
+        break 
+      }
+      else{      
+        randomCard = getRandomCard()
+        console.log((dealerDeck[randomCard]))
+        dealerHand.push(dealerDeck[randomCard])
+        dealerDeck.splice(randomCard, 1)
+        dealerHandCount()
+        console.log(dealerFinalCount)
+        // dealerFinalCount += dealerHandCount()
+        // console.log(dealerFinalCount)
+      }
+      
+    // }
+  }
+    //dealerHandCount()
     compareHands()
     playAgainBtn.removeAttribute("hidden", true)
   }
 
 // Determines if you're a winner, loser or tie game. 
 function compareHands(){
-    console.log(playerCount, dealerFinalCount)
-    if (playerCount > dealerFinalCount){
+    if (playerCount > dealerFinalCount || dealerFinalCount > 21){
       messageEl.innerHTML = `You Win!`
-      playAgainBtn.remove("hidden", true)
       return
     } 
-    else if (playerCount < dealerFinalCount){
+    else if (playerCount < dealerFinalCount || playerCount > 21){
       messageEl.innerHTML = `You Lose!`
-      playAgainBtn.remove("hidden", true)
       return
     }
-    else if (playerCount === dealerFinalCount){
+    else{
       messageEl.innerHTML = `It's a Tie!`
-      playAgainBtn.remove("hidden", true)
       return
     }
     

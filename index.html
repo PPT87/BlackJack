@@ -44,8 +44,10 @@
   <h2 id="dealer" class="player">Dealer <span id="dTotal">Total: 0</span></h2>
 
   <div class="dealerCards">
-    <img id="dcard1" src="" alt="">
-    <img id="dcard2" src="" alt="">
+    <div id="dCard1"></div>
+    <div id="dCard2"></div>
+    <!-- <img id="dcard1" src="images/clubs/clubs-J.svg" alt="">
+    <img id="dcard2" src="images/clubs/clubs-A.svg" alt=""> -->
    
    
   </div>
@@ -53,19 +55,21 @@
   <div>
     <h1 id="message">Press DEAL to start!</h1>
   </div>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button id="dealBtn" class="btn btn-success btn-lg dealBtn"> DEAL! </button>
+  </div>
 
   <div class="playerCards">
-    <div class="pcard1"></div>
-    <img id="pcard1" src=""alt="">
-    <img id="pcard2" src=""alt="">
+    <div id="pCard1"></div>
+    <div id="pCard2"></div>
+    <!-- <img id="pcard1" src="images/diamonds/diamonds-A.svg"alt="">
+    <img id="pcard2" src="images/hearts/hearts-r10.svg"alt=""> -->
   </div>
 
   <h2 id="userName" class="player">Player <span id="pTotal">Total: 0</span></h2>
 
   <div class="buttons">
-    <div class="d-grid gap-2 col-6 mx-auto">
-      <button id="dealBtn" class="btn btn-success btn-lg dealBtn"> DEAL! </button>
-    </div>
+    
     <button id="hitBtn" class="btn btn-primary hitBtn" hidden> Hit </button>
     <button id="standBtn" class="btn btn-secondary standBtn" hidden> Stand </button>
     <button id="playAgainBtn" class="btn btn-light playAgainBtn" hidden>Play Again?</button>
