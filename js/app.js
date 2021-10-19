@@ -1,4 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
+const switchTheme = document.querySelector("#switch");
 
 
 
@@ -37,18 +38,12 @@ let dTotalEl = document.getElementById('dTotal')
 /*----------------------------- Event Listeners -----------------------------*/
 // Event listeners
 document.getElementById('homeBtn').addEventListener('click', home)
-
 document.getElementById('dealBtn').addEventListener('click', gameStart)
-
 document.getElementById('playAgainBtn').addEventListener('click', gameStart)
-
 document.getElementById('hitBtn').addEventListener('click', hitMe)
-
 document.getElementById('standBtn').addEventListener('click', stand)
-
-
 document.getElementById('lightDarkBtn').addEventListener('click', () => {
-console.log('light/dark button works')
+  console.log(`lightDark Btn working`)
 })
 
 /*-------------------------------- Functions --------------------------------*/
@@ -94,9 +89,8 @@ function dInitialDeal(){
     dealerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
     dealerDeck.splice(dealCard, 1) // remove random card from the deck
 }
-dealerHandCount()
+dealerInitialSum()
 dCard1El.classList.add(dealerHand[0])
-dCard2El.classList.add(dealerHand[1])
 }
 
 
@@ -151,6 +145,34 @@ function playerHandCount(){
     pTotalEl.innerText = `Total: ${playerCount}` 
     
   }
+
+  //  Get total of dealer hand
+  function dealerInitialSum(){
+    dealerInitialCount = 0
+    dealerAce = 0
+    dHandVal.splice(0, dHandVal)
+      let value = dealerHand[0].slice(-1); 
+      if (value === "A"){ 
+        dHandVal.push(value) 
+      } 
+      if (value === "0" || value === "J" || value === "Q" || value === "K") {
+          dealerInitialCount += 10 
+      } 
+      else { 
+          dealerInitialCount += parseInt(value) 
+      }
+      if (dealerAce > 0) { 
+        if ((dealerInitialCount + 11 + (dealerAce - 1)) > 21){ // Check to see if one of the aces (more than 1) being 11 will put the total over 21
+            dealerInitialCount += dealerAce //if it does, only add the total number of aces to the total
+        }
+        else{ // if the ace being 11 doesn't got over 21, add 11 plus the number of aces minus 1 (the one you made 11)
+          dealerInitialCount += 11 + (dealerAce - 1)
+        }
+      }
+    console.log(`dealer`, dealerHand, dealerInitialCount)
+    dTotalEl.innerText = `Total: ${dealerInitialCount}`
+  }
+
 
   //  Get total of dealer hand
   function dealerHandCount(){
@@ -214,28 +236,24 @@ function stand(){
   }
     compareHands()
     playAgainBtn.removeAttribute("hidden", true)
+    dCard2El.classList.add(dealerHand[1])
   }
 
 // Determines if you're a winner, loser or tie game. 
 function compareHands(){
 
-   if (dealerFinalCount > 21){
-     messageEl.innerHTML = `Dealer BUSTS! You Win!`
-   } 
-
-    else if (playerCount > dealerFinalCount) {
+  if (dealerFinalCount > 21){
+    messageEl.innerHTML = `Dealer BUSTS! You Win!`
+  }
+  else if(playerCount > dealerFinalCount) {
       messageEl.innerHTML = `You Win!`
-      
-    } 
-    else if (playerCount < dealerFinalCount || playerCount > 21){
+  } 
+  else if(playerCount < dealerFinalCount || playerCount > 21){
       messageEl.innerHTML = `You Lose!`
-      
-    }
-    else{
+  }
+  else{
       messageEl.innerHTML = `It's a Tie!`
-      
-    }
-    
+  }
   }
 
 function home(){
