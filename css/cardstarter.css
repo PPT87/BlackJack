@@ -31,6 +31,10 @@ body {
   align-items: center;
   min-height: 100vh;
 }
+.dark-mode {
+  background-color: rgb(14, 69, 133);
+  color: white;
+}
 
 .player {
 	width: 40%;

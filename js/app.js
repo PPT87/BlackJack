@@ -42,9 +42,7 @@ document.getElementById('dealBtn').addEventListener('click', gameStart)
 document.getElementById('playAgainBtn').addEventListener('click', gameStart)
 document.getElementById('hitBtn').addEventListener('click', hitMe)
 document.getElementById('standBtn').addEventListener('click', stand)
-document.getElementById('lightDarkBtn').addEventListener('click', () => {
-  console.log(`lightDark Btn working`)
-})
+document.getElementById('lightDarkBtn').addEventListener('click', lightDark)
 
 /*-------------------------------- Functions --------------------------------*/
 //When PLAY button is clicked, everything is reset and cards are dealt. 
@@ -93,6 +91,20 @@ dealerInitialSum()
 dCard1El.classList.add(dealerHand[0])
 }
 
+//  Get dealer initial hand
+function dealerInitialSum(){
+  dealerInitialCount=0
+  value = dealerHand[0].slice(-1)
+  if (value === "A") { //If the card is an ace show value of 11
+  dealerInitialCount += 11
+  // If the card is valued at 1 (10), J, Q, K add 10 to the dealer sum
+  } else if (value === "0" || value === "J" || value === "Q" || value === "K") {
+      dealerInitialCount += 10
+  } else { // Otherwise, add the face value of the card to the dealer sum.
+      dealerInitialCount += parseInt(value) //parseInt converts the number to an integer
+  }
+  dTotalEl.innerText = `Total: ${dealerInitialCount}`
+}
 
 // get random card from dealerDeck
 function getRandomCard() {
@@ -143,36 +155,7 @@ function playerHandCount(){
     }
     console.log(`player`, playerHand, playerCount)
     pTotalEl.innerText = `Total: ${playerCount}` 
-    
   }
-
-  //  Get total of dealer hand
-  function dealerInitialSum(){
-    dealerInitialCount = 0
-    dealerAce = 0
-    dHandVal.splice(0, dHandVal)
-      let value = dealerHand[0].slice(-1); 
-      if (value === "A"){ 
-        dHandVal.push(value) 
-      } 
-      if (value === "0" || value === "J" || value === "Q" || value === "K") {
-          dealerInitialCount += 10 
-      } 
-      else { 
-          dealerInitialCount += parseInt(value) 
-      }
-      if (dealerAce > 0) { 
-        if ((dealerInitialCount + 11 + (dealerAce - 1)) > 21){ // Check to see if one of the aces (more than 1) being 11 will put the total over 21
-            dealerInitialCount += dealerAce //if it does, only add the total number of aces to the total
-        }
-        else{ // if the ace being 11 doesn't got over 21, add 11 plus the number of aces minus 1 (the one you made 11)
-          dealerInitialCount += 11 + (dealerAce - 1)
-        }
-      }
-    console.log(`dealer`, dealerHand, dealerInitialCount)
-    dTotalEl.innerText = `Total: ${dealerInitialCount}`
-  }
-
 
   //  Get total of dealer hand
   function dealerHandCount(){
@@ -221,7 +204,7 @@ function hitMe(){
 
 // Dealer will draw a card while the dealer count is <21.
 function stand(){
-  while (dealerFinalCount < 21){ // while the dealer is <21 it will continue to draw a card
+  while (dealerFinalCount < 17){ // while the dealer is <21 it will continue to draw a card
       if(dealerFinalCount >= playerCount){ // if the dealer count >= the player count. break out of the loop
         break 
       }
@@ -258,4 +241,9 @@ function compareHands(){
 
 function home(){
   window.location.reload()
+}
+
+function lightDark() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
 }
