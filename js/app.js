@@ -174,12 +174,12 @@ function playerHandCount(){
           dealerFinalCount += 11 + (dealerAce - 1)
         }
       }
-        if (dealerFinalCount > 21){
-        playAgainBtn.removeAttribute("hidden", true)
-        messageEl.innerText = `Dealer BUST! You Win!`
-        dTotalEl.innerText = `Total: ${dealerFinalCount}`
-        return
-      }
+      //   if (dealerFinalCount > 21){
+      //   playAgainBtn.removeAttribute("hidden", true)
+      //   messageEl.innerText = `Dealer BUST! You Win!`
+      //   dTotalEl.innerText = `Total: ${dealerFinalCount}`
+      //   return
+      // }
     }
     console.log(`dealer`, dealerHand, dealerFinalCount)
     dTotalEl.innerText = `Total: ${dealerFinalCount}`
@@ -191,49 +191,47 @@ function hitMe(){
   playerHand.push(dealerDeck[randomCard])
   dealerDeck.splice(randomCard, 1)
   playerHandCount()
+  console.log(`playerhit`, playerHand)
 }
 
 
 // If dealer is < player, draw card
 function stand(){
-  console.log (dealerHand)
   while (dealerFinalCount <= 21){
-    console.log(dealerFinalCount, playerCount)
-    // if (dealerFinalCount < playerCount){
       if(dealerFinalCount >= playerCount){
         break 
       }
       else{      
         randomCard = getRandomCard()
-        console.log((dealerDeck[randomCard]))
         dealerHand.push(dealerDeck[randomCard])
         dealerDeck.splice(randomCard, 1)
         dealerHandCount()
         console.log(dealerFinalCount)
-        // dealerFinalCount += dealerHandCount()
-        // console.log(dealerFinalCount)
-      }
-      
-    // }
+        console.log(`dealerstand`, dealerHand, dealerFinalCount)
+      }  
   }
-    //dealerHandCount()
     compareHands()
     playAgainBtn.removeAttribute("hidden", true)
   }
 
 // Determines if you're a winner, loser or tie game. 
 function compareHands(){
-    if (playerCount > dealerFinalCount || dealerFinalCount > 21){
+
+   if (dealerFinalCount > 21){
+     messageEl.innerHTML = `Dealer BUSTS! You Win!`
+   } 
+
+    else if (playerCount > dealerFinalCount) {
       messageEl.innerHTML = `You Win!`
-      return
+      
     } 
     else if (playerCount < dealerFinalCount || playerCount > 21){
       messageEl.innerHTML = `You Lose!`
-      return
+      
     }
     else{
       messageEl.innerHTML = `It's a Tie!`
-      return
+      
     }
     
   }
