@@ -25,13 +25,16 @@ let playAgainBtn = document.getElementById('playAgainBtn')
 let hitBtn = document.getElementById('hitBtn')
 let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
+let playerCardsEl = document.getElementById('playerCards')
 let pCard1El = document.getElementById('pCard1El')
 let pCard2El = document.getElementById('pCard2El')
 let pCardEl = document.getElementById('pCardEl')
 let dCard1El = document.getElementById('dCard1El')
 let dCard2El = document.getElementById('dCard2El')
+let dCardEl = document.getElementById('dCardEl')
 let pTotalEl = document.getElementById('pTotal')
 let dTotalEl = document.getElementById('dTotal')
+
 
 
 
@@ -57,28 +60,26 @@ function gameStart(){
     pCard1El.classList.remove(playerHand[0])
     pCard2El.classList.remove(playerHand[1])
     dCard1El.classList.remove(dealerHand[0])
-    dCard2El.classList.remove(dealerHand[1])
   
   // Empty player and dealer hands
   if (playerHand.length > 0){
     playerHand.splice(0, playerHand.length)
     dealerHand.splice(0, dealerHand.length)
-  }
+  } 
   pInitialDeal()
   dInitialDeal()
   }
 
-  // Deal out initial cards to player
-function pInitialDeal(){
-  for (let i=0; i<2; i++){ //loops 2 times to deal out 2 cards
-    dealCard = getRandomCard() //get 1 random card
-    playerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
-    dealerDeck.splice(dealCard, 1) // remove random card from the deck
-}
-  playerHandCount()
-  pCard1El.classList.add(playerHand[0])
-  pCard2El.classList.add(playerHand[1])
-}
+  function pInitialDeal(){
+    for (let i=0; i<2; i++){ //loops 2 times to deal out 2 cards
+      dealCard = getRandomCard() //get 1 random card
+      playerHand.push(dealerDeck[dealCard]) //pushes random card to dealer hand.
+      dealerDeck.splice(dealCard, 1) // remove random card from the deck
+  }
+    playerHandCount()
+    pCard1El.classList.add(playerHand[0])
+    pCard2El.classList.add(playerHand[1])
+  }
 
 // Deal out initial cards to dealer
 function dInitialDeal(){
@@ -131,7 +132,7 @@ function playerHandCount(){
     } 
   }
   for (i=0; i<(pHandVal.length); i++) { // loops through hand to see if you're holding any 10's or face cards
-    let value = pHandVal[i] // saves the current card value to the varible 'value'
+    let value = pHandVal[i] // saves the current card value to the variable 'value'
     if (value === "0" || value === "J" || value === "Q" || value === "K") { // Assigns 10 to these values
         playerCount += 10 // add 10 to hand count
     } 
@@ -139,11 +140,11 @@ function playerHandCount(){
         playerCount += parseInt(value) // converts the other values to a number
       } 
       if (playerAce > 0) { 
-        if ((playerCount + 11 + (playerAce - 1)) > 21){ // If one of the aces (if more than 1) being 11 will put the total over 21
-            playerCount += playerAce //if it does, only add playerCount to the number of aces in hand.
+        if (playerCount + 11 > 21){ // Checks to see if the ace will make total go over 21
+            playerCount += 1 //if it does, make the ace to a 1
           }
-          else{ // if the ace being 11 doesn't got over 21, add 11 plus the number of aces minus 1 (the one you made 11)
-            playerCount += 11 + (playerAce - 1)
+          else{ // if the ace being 11 doesn't got over 21, make the ace a value of 11
+            playerCount += 11
           }
       }
       if (playerCount > 21){
@@ -180,11 +181,11 @@ function playerHandCount(){
           dealerFinalCount += parseInt(value) 
       }
       if (dealerAce > 0) { 
-        if ((dealerFinalCount + 11 + (dealerAce - 1)) > 21){ // Check to see if one of the aces (more than 1) being 11 will put the total over 21
-            dealerFinalCount += dealerAce //if it does, only add the total number of aces to the total
+        if (dealerFinalCount + 11 > 21){ // Check to see if one of the aces (more than 1) being 11 will put the total over 21
+            dealerFinalCount += 1 //if it does, only add the total number of aces to the total
         }
         else{ // if the ace being 11 doesn't got over 21, add 11 plus the number of aces minus 1 (the one you made 11)
-          dealerFinalCount += 11 + (dealerAce - 1)
+          dealerFinalCount += 11 
         }
       }
     }
@@ -197,14 +198,13 @@ function hitMe(){
   randomCard = getRandomCard()
   playerHand.push(dealerDeck[randomCard])
   dealerDeck.splice(randomCard, 1)
-  pCardEl.classList.add(playerHand)
   playerHandCount()
   console.log(`playerhit`, playerHand)
 }
 
-// Dealer will draw a card while the dealer count is <21.
+// Dealer turn to make it's move
 function stand(){
-  while (dealerFinalCount < 17){ // while the dealer is <21 it will continue to draw a card
+  while (dealerFinalCount < 17){ // while the dealer is <17 it will continue to draw a card
       if(dealerFinalCount >= playerCount){ // if the dealer count >= the player count. break out of the loop
         break 
       }
@@ -244,6 +244,6 @@ function home(){
 }
 
 function lightDark() {
-  var element = document.body;
+  let element = document.body;
   element.classList.toggle("dark-mode");
 }
