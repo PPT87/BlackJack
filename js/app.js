@@ -8,7 +8,6 @@ const dealerDeck =[
   "sA","sQ","sK","sJ","s10","s09","s08","s07","s06","s05","s04","s03","s02"]
 
 /*-------------------------------- Variables --------------------------------*/
-// Declare deck variables
 let playerHand = []
 let dealerHand = []
 let playerSum = 0
@@ -47,17 +46,23 @@ function init(){
   messageEl.innerText = ""
   pTotalEl.innerText = ""
   dTotalEl.innerText = ""
-  let playerHand = []
-  let dealerHand = []
-  let playerSum = 0
-  let dealerSum = 0
-  let playerAces = 0
-  let dealerAces = 0
+  playerHand = []
+  dealerHand = []
+  pCardEl.innerHTML = ""
+  dCardEl.innerHTML = ""
+  playerSum = 0
+  dealerSum = 0
+  playerAces = 0
+  dealerAces = 0
+  pHandVal = [] 
+  dHandVal = []
+
   playAgainBtn.setAttribute("hidden", true)
   dealBtn.setAttribute("hidden", true)  
   hitBtn.removeAttribute("hidden", true)
   standBtn.removeAttribute("hidden", true)
   gameStart()
+  console.log(playerHand)
 }
 
 function gameStart(){
@@ -72,7 +77,7 @@ function pRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randomCard = dealerDeck.splice(randIdx, 1)
   playerHand.push(randomCard)
   playerSum += getPlayerSum()
-  pTotalEl.innerHTML = `Total: ${playerSum}`
+  pTotalEl.innerHTML = `Player Total: ${playerSum}`
   console.log(`player`, playerHand, playerSum)
   return randomCard
 }
@@ -83,7 +88,7 @@ function dRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randomCard = dealerDeck.splice(randIdx, 1)
   dealerHand.push(randomCard)
   dealerSum += getDealerSum()
-  dTotalEl.innerHTML = `Total: ${dealerSum}`
+  dTotalEl.innerHTML = `Dealer Total: ${dealerSum}`
   console.log(`dealer`, dealerHand, dealerSum)
   return randomCard
 } 
