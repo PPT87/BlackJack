@@ -76,6 +76,7 @@ function pRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   playerHand.push(randomCard)
+  checkPlayerAces()
   playerSum += getPlayerSum()
   pTotalEl.innerHTML = `Player Total: ${playerSum}`
   console.log(`player`, playerHand, playerSum)
@@ -87,6 +88,7 @@ function dRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   dealerHand.push(randomCard)
+  checkDealerAces()
   dealerSum += getDealerSum()
   dTotalEl.innerHTML = `Dealer Total: ${dealerSum}`
   console.log(`dealer`, dealerHand, dealerSum)
@@ -100,7 +102,7 @@ function getPlayerSum(){
     return 10
   }
   else if(endValue === "A"){
-    return checkPlayerAces()
+    return 1
   }
   else{
     return parseInt(endValue)
@@ -122,22 +124,23 @@ function getDealerSum(){
 }
 
 function checkPlayerAces(){
+  console.log(playerSum)
   if(playerSum + 11 > 21){
-    return 1
+    return playerSum + 1
   }
   else{
     // playerAces = 1
-    return 11
+    return playerSum + 11
   }
 }
 
 function checkDealerAces(){
   if(dealerSum + 11 > 21){
-    return 1
+    return dealerSum + 1
   }
   else{
     dealerAces = 1
-    return 11
+    return dealerSum + 11
   }
 }
 
@@ -152,7 +155,6 @@ function hitMe(){
     playAgainBtn.removeAttribute("hidden", true)
     hitBtn.setAttribute("hidden", true)
     standBtn.setAttribute("hidden", true)
-    getPlayerSum()
     return
   }
 }
@@ -163,17 +165,16 @@ function dealerHit(){
   newDiv.className = "card large"
   dCardEl.appendChild(newDiv)
   newDiv.classList.add(dRandomCard())
-  console.log(`newdiv`)
 }
 
 // Computer will run and check conditions below
 function stand(){
-  while (dealerSum <= 17 ){ // while the dealer is <17 it will continue to draw a card
-    const newDiv = document.createElement('div');
-    newDiv.className = "card large"
-    dCardEl.appendChild(newDiv)
-    newDiv.classList.add(dRandomCard())
-    isWinner()
+  while (dealerSum < 17){ // while the dealer is <17 it will continue to draw a card
+    dealerHit()
+    // const newDiv = document.createElement('div');
+    // newDiv.className = "card large"
+    // dCardEl.appendChild(newDiv)
+    // newDiv.classList.add(dRandomCard())
     if(dealerSum >= playerSum || dealerSum > 21){ // if the dealer count >= the player count. break out of the loop
       isWinner()
       playAgainBtn.removeAttribute("hidden", true)
