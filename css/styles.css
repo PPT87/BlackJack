@@ -33,7 +33,7 @@ body {
 }
 .dark-mode {
   background-color: rgb(14, 69, 133);
-  color: white;
+  color: rgb(207, 207, 207);
 }
 
 .player {
@@ -44,7 +44,7 @@ body {
 	display: inline-block;
 	margin: 1%;
 	vertical-align: top;
-	background: #e4dcdc;
+	background: #d44242;
 }
 
 .switch {
