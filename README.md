@@ -13,6 +13,7 @@ Background:
 
 Rules:
   The rules are simple. 21 is the magic number and you're competing against the dealer to get closest to 21 without going over. Going over will warrant an instant loss.
+
     1. The player and the dealer will receive 2 cards. However, you will only be able to see 1 of the dealer cards. From here you can decide to Hit or Stand.
     2. All cards hold values. Suits don't hold any value which makes things simpler. Below are the values
       a. 2 = 2
@@ -39,7 +40,11 @@ Rules:
     6. Going back to the first point, once dealt your cards, you have a choice to Hit or Stand
        a. Hit: Asking for another card to be dealt to you. You can draw however many times as you like. Keep in mind, the goal is to reach 21 without going over. 
           i. Going over 21 is called a Bust. It's like putting too much air in a balloon. Put in too much, it'll bust. 
-       b. Stand: 
+       b. Stand: Once you decide to stand, you can't Hit any more. This allows the dealer to reveal its 2nd card to see its total. The dealer will have one main objective at this point. To beat your score (or at least match). 
+    7. Generally, and for the sake of this particular game, that's it for the rules. 
+
+
+
 
 
 

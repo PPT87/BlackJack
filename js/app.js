@@ -82,8 +82,8 @@ function pRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   playerHand.push(randomCard)
-  checkPlayerAces()
-  playerSum += getPlayerSum()
+  playerSum = getPlayerSum()
+  console.log(playerSum)
   pTotalEl.innerHTML = `Player Total: ${playerSum}`
   return randomCard
 }
@@ -93,24 +93,33 @@ function dRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   dealerHand.push(randomCard)
-  checkDealerAces()
-  dealerSum += getDealerSum()
+  dealerSum = getDealerSum()
+  
   dTotalEl.innerHTML = `Dealer Total: ${dealerSum}`
   return randomCard
 } 
 
 function getPlayerSum(){
-  let value = playerHand[playerHand.length - 1].toString()
-  let endValue = value.slice(-1)
-  if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
-    return 10
+  let total = 0
+  let playerAce = 0
+  for (let i=0; i<playerHand.length; i++){
+    let value = playerHand[playerHand.length - 1].toString()
+    let endValue = value.slice(-1)
+    console.log(`endvalue`, endValue)
+    if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
+      total += 10
+    }
+    else if(endValue === "A"){
+      playerAce++
+    }
+    else{
+      total+= parseInt(endValue)
+    }
   }
-  else if(endValue === "A"){
-    return checkPlayerAces()
+  if(playerAce){
+    total += checkPlayerAces(playerAce, total)
   }
-  else{
-    return parseInt(endValue)
-  }
+  return total
 }
 
 function getDealerSum(){
@@ -119,7 +128,7 @@ function getDealerSum(){
   if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
     return 10
   }
-  else if(endValue === "A"){
+  if(endValue === "A"){
     return checkDealerAces()
   }
   else{
@@ -127,13 +136,19 @@ function getDealerSum(){
   }
 }
 
-function checkPlayerAces(){
-  if(playerSum + 11 > 21){
-    return 1
+function checkPlayerAces(handCount, acesInHand){
+  let ace11HandCount = handCount
+  let playerAce = acesInHand
+  ace11HandCount += 11 
+  playerAce -= 1
+  for (let remainingAces = playerAce; remainingAces > 0; remainingAces--){
+    ace11HandCount += 1
+  }
+  if(ace11HandCount > 21){
+    return handCount + acesInHand
   }
   else{
-    playerAces = 1
-    return 11
+    return ace11HandCount
   }
 }
 
