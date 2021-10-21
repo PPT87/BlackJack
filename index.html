@@ -22,35 +22,41 @@
   ></script>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <link rel="stylesheet" href="css/styles.css">  
   <script defer src="js/app.js"></script>
 </head>
 
-<div class="Top">
-    <button id="homeBtn"class=""><i class="fa fa-home"></i></button>
-    <button id="lightDarkBtn" class="btn btn-secondary standBtn"> Light/Dark </button>
-  </div>
-
-    <h1><span id="hearts">♥</span><span id="spades">♠</span> BLACKJACK! <span id="clubs">♣</span><span id="diamonds">♦</span></h1>
-
-
-    <div class="Dealer">
-      <div id="dTotal" class="dealerTotal" hidden>Dealer</div>
-      <div id="dCardEl" class=""></div>
+<body>
+  <div class="Top">
+      <button id="homeBtn"class=""><i class="fa fa-home"></i></button>
+      <button id="lightDarkBtn" class="btn btn-secondary standBtn"> Light/Dark </button>
     </div>
-    <div class="middle-container">
-      <div id="deck" class="deck"></div>
-      <button id="dealBtn" class="btn btn-primary"> DEAL! </button>
-      <div id="message" class="message">Press DEAL! To Start</div>
-    </div>
-
-    <div class="Player">
-      <div id="pCardEl" class=""></div>
-      <div id="pTotal" class="playerTotal" hidden>Player</div>
-    </div>
-
-      <div>
-      <button id="hitBtn" class="btn btn-primary hitBtn" hidden> Hit </button>
-      <button id="standBtn" class="btn btn-secondary standBtn" hidden> Stand </button>
-      <button id="playAgainBtn" class="btn btn-light playAgainBtn" hidden>Play Again?</button>
-    </div>
+  
+      <h1><span id="hearts">♥</span><span id="spades">♠</span> BLACKJACK! <span id="clubs">♣</span><span id="diamonds">♦</span></h1>
+  
+  
+      <div class="Dealer">
+        <div id="dTotal" class="dealerTotal" hidden>Dealer</div>
+        <div id="dCardEl" class=""></div>
+      </div>
+      <div class="middle-container">
+        <div id="deck" class="deck"></div>
+        <button id="dealBtn" class="btn btn-primary"> DEAL! </button>
+        <div id="message" class="message">Press DEAL! To Start</div>
+      </div>
+  
+      <div class="Player">
+        <div id="pCardEl" class=""></div>
+        <div id="pTotal" class="playerTotal" hidden>Player</div>
+      </div>
+        <div id="btnContainer">
+          <div id="buttonContainer"></div>
+        <button id="hitBtn" class="btn btn-primary hitBtn" hidden> Hit </button>
+        <button id="standBtn" class="btn btn-secondary standBtn" hidden> Stand </button>
+        <button id="playAgainBtn" class="btn btn-light playAgainBtn" hidden>Play Again?</button>
+      </div>
+</body>

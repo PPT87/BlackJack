@@ -1,5 +1,7 @@
 # Welcome to BLACKJACK
 
+# Author
+Peter Tran
 # Rules:
 
   The rules are simple. 21 is the magic number and you're competing against the dealer to get closest to 21 without going over. Going over will warrant an instant loss.
@@ -46,6 +48,9 @@
   8. "STAND" button will initiate the dealer to do their thing
   9. Once a winner/loser has been determined an option to "Play Again?" will appear
 
+# Screenshots:
+
+
 # WIN/LOSE:
 - There are multiple WIN and LOSE conditions that can occur
 
@@ -71,21 +76,38 @@
 - A LIGHT/DARK mode toggle switch can be accessed in the top left corner for those late night blackjack sessions
 - DOM manipulation to dynamically add card images to screen, change win/lose message and made buttons hidden/appear
 
-# Technologies Used:
+# What I Used:
 - HTML
 - CSS
 - JavaScript
 - Bootstrap
 
-# Icebox Items:
-  This is a card game that can be playable in mobile and browser. This is still a work in progress and future iterations will work out further bugs and add additional features that include, but not limited to
+# Future Updates:
+Although it the game functions, there's always something that can improve. Here are some items yet to come!
   1. Betting
   2. Enhanced animations
   3. Sound Effects
-  4. Visual / game play experience
-  5. UI
+  4. Visuals
+  5. UI/UX
   6. Expand
 
 
-<img src="">Link to wire frames
-https://whimsical.com/blackjack-DtJYkmbGWKHaLwub2DWSCF
+# Since You're Still Here!
+- Check out my original wire frames:
+<img src=""> https://whimsical.com/blackjack-DtJYkmbGWKHaLwub2DWSCF
+
+- Try out the game:
+<img src=""> https://letsplayjsblackjack.netlify.app/
+
+# Credits:
+W3schools:
+<img src="">https://www.w3schools.com/w3css/w3css_icons.asp
+
+Unicode-table:
+<img src="">https://unicode-table.com/en/sets/suits-of-the-cards/
+
+getbootstrap:
+<img src="">https://getbootstrap.com/docs/4.0/components/buttons/
+
+NyteMyre:
+<img src="">https://imgur.com/gallery/zlmjXC9
