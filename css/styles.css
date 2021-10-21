@@ -23,8 +23,7 @@ html {
 body {
   background-color: rgb(190, 190, 190);
 /* Use a system font, if none are available use an available sans-sarif   font */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: 'Caveat', cursive; system-ui;
   margin: 0;
   display: grid;
   justify-content: center;
@@ -33,17 +32,34 @@ body {
 }
 .dark-mode {
   background-color: rgb(14, 69, 133);
-  color: rgb(207, 207, 207);
+  color: rgb(248, 248, 248);
 }
 
 h1{
+  font-family: 'Caveat', cursive; system-ui;
   font-size: 6rem;
-  margin-left: 22px;
+  grid-row: 2/3;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
 }
 
-#dCard2{
-  display: flex;
+#hearts{
+  color: red;
+  font-size: 4rem;
+}
 
+#diamonds{
+color: red;
+font-size: 4rem;
+}
+
+#clubs{
+font-size: 4rem;
+}
+
+#spades{
+font-size: 4rem;
 }
 
 #deck{
@@ -56,16 +72,31 @@ div.card.large{
   margin: 0;
 }
 
+#dCardEl{
+align-items: center;
+text-align: center;
+justify-content: center;
+}
+
+#pCardEl{
+align-items: center;
+text-align: center;
+
+}
 #message{
+  text-align: center;
+  font-family: 'Caveat', cursive; system-ui;
   font-size: 4.5rem;
 }
 
 #pTotal{
   font-size: 2rem;
+  background-color: rgb(14, 211, 14);
 }
 
 #dTotal{
   font-size: 2rem;
+  background-color: rgb(230, 86, 86);
 }
 
 #dealBtn{
@@ -74,8 +105,9 @@ div.card.large{
   justify-content: center;
   align-content: center;
   align-items: center;
+  text-align: center;
   height: 100px;
-  width: auto;
+  width: 100px;
   margin-bottom: 180px;
   margin-left: 152px;
   font-size: 3rem;
@@ -102,10 +134,13 @@ div.card.large{
 }
 
 #playAgainBtn{
+  grid-row: 1/2;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   font-size: 50px;
   font-size: 10px;
-  margin-left: 120px;
-  height: 80px;
+  height: 30px;
   width: auto;
   margin-bottom: 50px;
   font-size: 3rem;
@@ -113,6 +148,8 @@ div.card.large{
 }
 
 #homeBtn{
+  color: rgb(248, 248, 248);
+  background-color: rgb(9, 151, 137);
   height: 50px;
   width: 50px;
   text-align: center;
@@ -120,16 +157,17 @@ div.card.large{
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: #ffffff;
+  background-color: none;
   border-radius: 30px;
+  margin-top: 20px;
+  border: none;
 }
 
 #lightDarkBtn{
-  display: inline-flex;
-  justify-content: right;
   height: 50px;
   width: 50px;
   margin-left: 300px;
+  margin-bottom: 20px;
 }
 
 @media only screen and (min-width: 600px) {

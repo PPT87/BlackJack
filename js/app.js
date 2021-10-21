@@ -63,7 +63,6 @@ function gameStart(){
   hitMe()
   hitMe()
   dealerHit()
-  dealerHiddenCard()
   blackJack()
 }
 
