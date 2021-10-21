@@ -64,7 +64,8 @@ function init(){
 
 function gameStart(){
   hitMe()
-
+  hitMe()
+  dealerHit()
   dealerHit()
 }
 
@@ -73,7 +74,6 @@ function pRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randomCard = dealerDeck.splice(randIdx, 1)
   playerHand.push(randomCard)
   playerSum = getPlayerSum()
-  console.log(playerSum)
   pTotalEl.innerHTML = `Player Total: ${playerSum}`
   return randomCard
 }
@@ -83,8 +83,7 @@ function dRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   dealerHand.push(randomCard)
-  dealerSum += getDealerSum()
-  
+  dealerSum = getDealerSum()
   dTotalEl.innerHTML = `Dealer Total: ${dealerSum}`
   return randomCard
 } 
@@ -96,7 +95,6 @@ function getPlayerSum(){
     console.log(total)
     let value = playerHand[i].toString()
     let endValue = value.slice(-1)
-    console.log(endValue)
     if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
       total += 10
     }
@@ -110,22 +108,30 @@ function getPlayerSum(){
   if(playerAces){
     total = checkPlayerAces(total, playerAces)
   }
-  console.log(total)
   return total
 }
 
 function getDealerSum(){
-  let value = dealerHand[dealerHand.length - 1].toString()
-  let endValue = value.slice(-1)
-  if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
-    return 10
+  let total = 0
+  let dealerAces = 0
+  for (let i=0; i<dealerHand.length; i++){
+    console.log(total)
+    let value = dealerHand[i].toString()
+    let endValue = value.slice(-1)
+    if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
+      total += 10
+    }
+    else if(endValue === "A"){
+      dealerAces++
+    }
+    else{
+      total += parseInt(endValue)
+    }
   }
-  if(endValue === "A"){
-    return checkDealerAces()
+  if(dealerAces){
+    total = checkDealerAces(total, dealerAces)
   }
-  else{
-    return parseInt(endValue)
-  }
+  return total
 }
 
 function checkPlayerAces(CurrentHandCount, acesInHand){
@@ -149,13 +155,24 @@ function checkPlayerAces(CurrentHandCount, acesInHand){
   }
 }
 
-function checkDealerAces(){
-  if(dealerSum + 11 > 21){
-    return 1
+function checkDealerAces(CurrentHandCount, acesInHand){
+  let ace11HandCount = CurrentHandCount
+  let tempDealerAces = acesInHand
+    ace11HandCount += 11 
+    console.log(ace11HandCount)
+    tempDealerAces -= 1
+    console.log(tempDealerAces)
+  for (let remainingAces = tempDealerAces; remainingAces > 1; remainingAces--){
+    ace11HandCount += 1
+    console.log(ace11HandCount)
+  }
+  if(ace11HandCount > 21){
+    console.log(CurrentHandCount, acesInHand)
+    return CurrentHandCount + acesInHand
   }
   else{
-    dealerAces = 1
-    return 11
+    console.log(ace11HandCount)
+    return ace11HandCount
   }
 }
 
