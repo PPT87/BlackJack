@@ -92,7 +92,6 @@ function getPlayerSum(){
   let total = 0
   let playerAces = 0
   for (let i=0; i<playerHand.length; i++){
-    console.log(total)
     let value = playerHand[i].toString()
     let endValue = value.slice(-1)
     if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
@@ -115,7 +114,6 @@ function getDealerSum(){
   let total = 0
   let dealerAces = 0
   for (let i=0; i<dealerHand.length; i++){
-    console.log(total)
     let value = dealerHand[i].toString()
     let endValue = value.slice(-1)
     if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
@@ -138,19 +136,16 @@ function checkPlayerAces(CurrentHandCount, acesInHand){
   let ace11HandCount = CurrentHandCount
   let tempPlayerAces = acesInHand
     ace11HandCount += 11 
-    console.log(ace11HandCount)
     tempPlayerAces -= 1
     console.log(tempPlayerAces)
   for (let remainingAces = tempPlayerAces; remainingAces > 1; remainingAces--){
     ace11HandCount += 1
-    console.log(ace11HandCount)
   }
   if(ace11HandCount > 21){
     console.log(CurrentHandCount, acesInHand)
     return CurrentHandCount + acesInHand
   }
   else{
-    console.log(ace11HandCount)
     return ace11HandCount
   }
 }
@@ -158,20 +153,16 @@ function checkPlayerAces(CurrentHandCount, acesInHand){
 function checkDealerAces(CurrentHandCount, acesInHand){
   let ace11HandCount = CurrentHandCount
   let tempDealerAces = acesInHand
-    ace11HandCount += 11 
-    console.log(ace11HandCount)
+    ace11HandCount += 11
     tempDealerAces -= 1
-    console.log(tempDealerAces)
   for (let remainingAces = tempDealerAces; remainingAces > 1; remainingAces--){
     ace11HandCount += 1
-    console.log(ace11HandCount)
   }
   if(ace11HandCount > 21){
     console.log(CurrentHandCount, acesInHand)
     return CurrentHandCount + acesInHand
   }
   else{
-    console.log(ace11HandCount)
     return ace11HandCount
   }
 }
