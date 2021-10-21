@@ -1,4 +1,4 @@
-// ----BLACKJACK----//
+# BLACKJACK
 
 
 Background:
@@ -12,6 +12,7 @@ Background:
     6. UI
 
 Rules:
+
   The rules are simple. 21 is the magic number and you're competing against the dealer to get closest to 21 without going over. Going over will warrant an instant loss.
 
     1. The player and the dealer will receive 2 cards. However, you will only be able to see 1 of the dealer cards. From here you can decide to Hit or Stand.
@@ -44,47 +45,41 @@ Rules:
     7. Generally, and for the sake of this particular game, that's it for the rules. 
 
 
+GAME DESCRIPTION:
+  1. The main screen will have no cards on the table.
+  2. Main screen will offer player to start game by hitting the "DEAL" button. 
+  3. The "DEAL" button will initialize the game to start
+  4. The player will receive 2 cards and you will only see the dealer's 1st card
+  5. The sum of the 2 cards for the dealer and player will appear 
+  6. The player has a choice of either "HIT" or "STAY"
+  7. "HIT" button allows the player to be dealt one more card
+  8. "STAND" button will initiate the dealer to do their thing
+  9. Once a winner/loser has been determined 
+
+# WIN/LOSE:
+There are multiple WIN and LOSE conditions that can occur
+
+  WIN CONDITIONS
+   - A "YOU WIN!" message will appear if you meet the win conditions 
+   - If player total > dealer total upon 1st hand
+   - If player total > dealer total upon hits
+   - If dealer busts
+
+  LOSE CONDITIONS
+   - A "YOU LOSE!" message will appear if you meet the lose conditions 
+   - If player total < dealer total upon 1st hand
+   - If player total < dealer total upon hits
+   - If player busts
+
+  TIE CONDITIONS
+   - A "YOU TIED!" message will appear if you meet the tie conditions
+   - If player total === dealer total upon 1st hand
+   - If player total === dealer total upon hits
+
+The HOME button icon in the top left corner will allow the player to bring the game back to the original game state (Restart)
+
+A LIGHT/DARK mode toggle switch can be accessed in the top left corner
 
 
-
-
-
-
-// GAME DESCRIPTION:
-
-// The main screen will have no cards on the table.
-// Main screen will offer player to start game by hitting the "DEAL" button. 
-// The "DEAL" button will initialize the game to start
-  // The dealer and the player will each get 2 cards. 
-  // The count circle will display the sum of the 2 cards for the dealer and player
-// The player has a choice of either "HIT" or "STAY"
-  // "HIT" button allows the player to be dealt one more card. 
-    // the count/sum will update accordingly
-  // "STAND" button will initiate the dealer to either stay or hit
-
-// There are multiple WIN and LOSE conditions that can occur
-
-// WIN CONDITIONS
-// A "YOU WIN!" message will appear if you meet the win conditions (GREEN TEXT)
-  // If player total > dealer total upon 1st hand
-  // If player total > dealer total upon hits
-  // If dealer busts
-
-// LOSE CONDITIONS
-// A "YOU LOSE!" message will appear if you meet the lose conditions (RED TEXT)
-  // If player total < dealer total upon 1st hand
-  // If player total < dealer total upon hits
-  // If player busts
-
-// TIE CONDITIONS
-// A "YOU TIED!" message will appear if you meet the tie conditions (BLACK TEXT)
-  // If player total === dealer total upon 1st hand
-  // If player total === dealer total upon hits
-
-// The HOME button icon in the top left corner will allow the player to bring the game back to the original game state (Restart)
-
-// A LIGHT/DARK mode toggle switch can be accessed in the top left corner
-
-
-// Link to high level wire frame
-// https://whimsical.com/blackjack-DtJYkmbGWKHaLwub2DWSCF
+<img src="">Link to high level wire frame
+https://whimsical.com/blackjack-DtJYkmbGWKHaLwub2DWSCF

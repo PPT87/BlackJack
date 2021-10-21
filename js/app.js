@@ -14,8 +14,6 @@ let pHandVal = []
 let dHandVal = [] 
 let playerSum = 0
 let dealerSum = 0
-let playerAces = 0
-let dealerAces = 0
 
 /*------------------------ Cached Element References ------------------------*/
 // Cached element references
@@ -53,8 +51,6 @@ function init(){
   dCardEl.innerHTML = ""
   playerSum = 0
   dealerSum = 0
-  playerAces = 0
-  dealerAces = 0
   pHandVal = [] 
   dHandVal = []
   pTotalEl.removeAttribute("hidden", true)
@@ -68,14 +64,8 @@ function init(){
 
 function gameStart(){
   hitMe()
-  hitMe()
-  dealerHit()
-}
 
-function dealerHiddenCard(){
-  const newDiv = document.createElement('div');
-  newDiv.className = "card large back"
-  dCardEl.appendChild(newDiv)
+  dealerHit()
 }
 
 function pRandomCard(){// Flippin' awesome code. This grabs a random card from the deck
@@ -93,7 +83,7 @@ function dRandomCard(){// Flippin' awesome code. This grabs a random card from t
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   dealerHand.push(randomCard)
-  dealerSum = getDealerSum()
+  dealerSum += getDealerSum()
   
   dTotalEl.innerHTML = `Dealer Total: ${dealerSum}`
   return randomCard
@@ -101,24 +91,26 @@ function dRandomCard(){// Flippin' awesome code. This grabs a random card from t
 
 function getPlayerSum(){
   let total = 0
-  let playerAce = 0
+  let playerAces = 0
   for (let i=0; i<playerHand.length; i++){
-    let value = playerHand[playerHand.length - 1].toString()
+    console.log(total)
+    let value = playerHand[i].toString()
     let endValue = value.slice(-1)
-    console.log(`endvalue`, endValue)
+    console.log(endValue)
     if (endValue === "0" || endValue === "J" || endValue === "Q" || endValue === "K"){
       total += 10
     }
     else if(endValue === "A"){
-      playerAce++
+      playerAces++
     }
     else{
-      total+= parseInt(endValue)
+      total += parseInt(endValue)
     }
   }
-  if(playerAce){
-    total += checkPlayerAces(playerAce, total)
+  if(playerAces){
+    total = checkPlayerAces(total, playerAces)
   }
+  console.log(total)
   return total
 }
 
@@ -136,18 +128,23 @@ function getDealerSum(){
   }
 }
 
-function checkPlayerAces(handCount, acesInHand){
-  let ace11HandCount = handCount
-  let playerAce = acesInHand
-  ace11HandCount += 11 
-  playerAce -= 1
-  for (let remainingAces = playerAce; remainingAces > 0; remainingAces--){
+function checkPlayerAces(CurrentHandCount, acesInHand){
+  let ace11HandCount = CurrentHandCount
+  let tempPlayerAces = acesInHand
+    ace11HandCount += 11 
+    console.log(ace11HandCount)
+    tempPlayerAces -= 1
+    console.log(tempPlayerAces)
+  for (let remainingAces = tempPlayerAces; remainingAces > 1; remainingAces--){
     ace11HandCount += 1
+    console.log(ace11HandCount)
   }
   if(ace11HandCount > 21){
-    return handCount + acesInHand
+    console.log(CurrentHandCount, acesInHand)
+    return CurrentHandCount + acesInHand
   }
   else{
+    console.log(ace11HandCount)
     return ace11HandCount
   }
 }
@@ -191,7 +188,6 @@ function stand(){
     const newDiv = document.createElement('div');
     newDiv.className = "card large"
     dCardEl.appendChild(newDiv)
-    newDiv.classList.add(dRandomCard())
     newDiv.classList.add(dRandomCard())
     if(dealerSum >= playerSum || dealerSum > 21){ // if the dealer count >= the player count. break out of the loop
       isWinner()
