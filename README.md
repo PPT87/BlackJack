@@ -7,7 +7,7 @@
   1. The player and the dealer will receive 2 cards. However, you will only be able to see 1 of the dealer cards. From here you can decide to Hit or Stand.
      - All cards hold values. Suits don't hold any value which makes things simpler. Below are the values
          - 2 = 2
-         -  3 = 3
+         - 3 = 3
          - 4 = 4
          - 5 = 5
          - 6 = 6
@@ -27,12 +27,12 @@
               - OH NO! Your score is 25 (11 + 4 + 10) going over 21
               - BUT WAIT! You can change your Ace value to a 1 making a total of 15 (1 + 4 + 10)
         - Keep in mind, if you have multiple Aces in your hand, you can convert them from 11 to 1 (or vice versa) at anytime
-- Getting 21 is called blackjack. If you get blackjack, don't think you've instantly won. The dealer still has an opportunity to match albeit, very difficult
+- Getting 21 is called blackjack. If you get blackjack, don't think you've instantly won. The dealer might also have a blackjack in their hand, albeit, very unlikely
     -  Going back to the first point, once dealt your cards, you have a choice to Hit or Stand
        - Hit: Asking for another card to be dealt to you. You can draw however many times as you like. Keep in mind, the goal is to reach 21 without going over. 
           i. Going over 21 is called a Bust. It's like putting too much air in a balloon. Put in too much, it'll bust. 
        - Stand: Once you decide to stand, you can't Hit any more. This allows the dealer to reveal its 2nd card to see its total. The dealer will have one main objective at this point. To beat your score (or at least match). 
-2. Generally, and for the sake of this particular game, that's it for the rules. 
+1. Generally, and for the sake of this particular game, that's it for the rules. 
 
 
 # GAME DESCRIPTION: 

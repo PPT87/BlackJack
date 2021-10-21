@@ -26,7 +26,6 @@ let messageEl = document.getElementById('message')
 let playerCardsEl = document.getElementById('playerCards')
 let pCardEl = document.getElementById('pCardEl')
 let dCardEl = document.getElementById('dCardEl')
-let dCard2El = document.getElementById('dCard2')
 let pTotalEl = document.getElementById('pTotal')
 let dTotalEl = document.getElementById('dTotal')
 
@@ -64,6 +63,8 @@ function gameStart(){
   hitMe()
   hitMe()
   dealerHit()
+  dealerHiddenCard()
+  blackJack()
 }
 
 function pRandomCard(){
@@ -83,6 +84,12 @@ function dRandomCard(){
   dTotalEl.innerHTML = `Dealer Total: ${dealerSum}`
   return randomCard
 } 
+
+function dealerHiddenCard(){
+  const newDiv = document.createElement('div');
+  newDiv.className = "card large back"
+  dCardEl.appendChild(newDiv)
+}
 
 function getPlayerSum(){
   let total = 0
@@ -193,8 +200,27 @@ function stand(){
       playAgainBtn.removeAttribute("hidden", true)
       hitBtn.setAttribute("hidden", true)
       standBtn.setAttribute("hidden", true)
+      dCardEl.classList.remove('card', 'large', 'back')
       break
     } 
+  }
+}
+
+function blackJack(){
+  if (playerSum === 21 && dealerSum != 21){
+    messageEl.innerHTML = `BLACKJACK! You Win!`
+    playAgainBtn.removeAttribute("hidden", true)
+    hitBtn.setAttribute("hidden", true)
+    standBtn.setAttribute("hidden", true)
+  }
+  else if (dealerSum === 21 && playerSum !== 21){
+    messageEl.innerHTML = `Dealer BLACKJACK! You Lose!`
+    playAgainBtn.removeAttribute("hidden", true)
+    hitBtn.setAttribute("hidden", true)
+    standBtn.setAttribute("hidden", true)
+  }
+  else {
+    return
   }
 }
 
@@ -203,10 +229,10 @@ function isWinner(){
     messageEl.innerHTML = `Dealer BUSTS! You Win!`
   }
   else if (playerSum === 21 && dealerSum < playerSum){
-    messageEl.innerHTML = ` BLACKJACK! You Win!`
+    messageEl.innerHTML = `You Win!`
   }
   else if (dealerSum === 21 && dealerSum > playerSum){
-      messageEl.innerHTML = `Dealer BLACKJACK! You Lose!`
+      messageEl.innerHTML = `You Lose!`
   }
   else if(playerSum > dealerSum) {
       messageEl.innerHTML = `You Win!`
