@@ -16,7 +16,6 @@ let playerSum = 0
 let dealerSum = 0
 
 /*------------------------ Cached Element References ------------------------*/
-// Cached element references
 let lightDarkBtn = document.getElementById('lightDarkBtn')
 let homeBtn = document.getElementById('homeBtn')
 let dealBtn = document.getElementById('dealBtn')
@@ -32,7 +31,6 @@ let pTotalEl = document.getElementById('pTotal')
 let dTotalEl = document.getElementById('dTotal')
 
 /*----------------------------- Event Listeners -----------------------------*/
-// Event listeners
 document.getElementById('homeBtn').addEventListener('click', home)
 document.getElementById('dealBtn').addEventListener('click', init)
 document.getElementById('playAgainBtn').addEventListener('click', init)
@@ -66,10 +64,9 @@ function gameStart(){
   hitMe()
   hitMe()
   dealerHit()
-  dealerHit()
 }
 
-function pRandomCard(){// Flippin' awesome code. This grabs a random card from the deck
+function pRandomCard(){
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   playerHand.push(randomCard)
@@ -78,8 +75,7 @@ function pRandomCard(){// Flippin' awesome code. This grabs a random card from t
   return randomCard
 }
 
-// Deal out initial cards to dealer
-function dRandomCard(){// Flippin' awesome code. This grabs a random card from the deck
+function dRandomCard(){
   let randIdx = Math.floor(Math.random() * dealerDeck.length)
   let randomCard = dealerDeck.splice(randIdx, 1)
   dealerHand.push(randomCard)
@@ -132,42 +128,39 @@ function getDealerSum(){
   return total
 }
 
-function checkPlayerAces(CurrentHandCount, acesInHand){
-  let ace11HandCount = CurrentHandCount
+function checkPlayerAces(currentHandCount, acesInHand){
+  let ace11HandCount = currentHandCount
   let tempPlayerAces = acesInHand
-    ace11HandCount += 11 
-    tempPlayerAces -= 1
-    console.log(tempPlayerAces)
+  ace11HandCount += 11 
+  tempPlayerAces -= 1
   for (let remainingAces = tempPlayerAces; remainingAces > 1; remainingAces--){
     ace11HandCount += 1
   }
   if(ace11HandCount > 21){
-    console.log(CurrentHandCount, acesInHand)
-    return CurrentHandCount + acesInHand
+    return currentHandCount + acesInHand
   }
   else{
     return ace11HandCount
   }
 }
 
-function checkDealerAces(CurrentHandCount, acesInHand){
-  let ace11HandCount = CurrentHandCount
+function checkDealerAces(currentHandCount, acesInHand){
+  let ace11HandCount = currentHandCount
   let tempDealerAces = acesInHand
-    ace11HandCount += 11
-    tempDealerAces -= 1
+  ace11HandCount += 11
+  tempDealerAces -= 1
   for (let remainingAces = tempDealerAces; remainingAces > 1; remainingAces--){
     ace11HandCount += 1
   }
   if(ace11HandCount > 21){
-    console.log(CurrentHandCount, acesInHand)
-    return CurrentHandCount + acesInHand
+    console.log(currentHandCount, acesInHand)
+    return currentHandCount + acesInHand
   }
   else{
     return ace11HandCount
   }
 }
 
-// Draws 1 random card and recalculates total. If over 21, you lose
 function hitMe(){
   const newDiv = document.createElement('div');
   newDiv.className = "card large"
@@ -182,7 +175,6 @@ function hitMe(){
   }
 }
 
-// Daws 1 random card for dealer
 function dealerHit(){
   const newDiv = document.createElement('div');
   newDiv.className = "card large"
@@ -190,14 +182,13 @@ function dealerHit(){
   newDiv.classList.add(dRandomCard())
 }
 
-// Computer will run and check conditions below
 function stand(){
-  while (dealerSum <21 && dealerSum < playerSum){ // while the dealer is <17 it will continue to draw a card
+  while (dealerSum <=16 || dealerSum < playerSum){
     const newDiv = document.createElement('div');
     newDiv.className = "card large"
     dCardEl.appendChild(newDiv)
     newDiv.classList.add(dRandomCard())
-    if(dealerSum >= playerSum || dealerSum > 21){ // if the dealer count >= the player count. break out of the loop
+    if(dealerSum >= playerSum && dealerSum > 16){
       isWinner()
       playAgainBtn.removeAttribute("hidden", true)
       hitBtn.setAttribute("hidden", true)
@@ -207,7 +198,6 @@ function stand(){
   }
 }
 
-// Check to see win/lose conditions
 function isWinner(){
   if (dealerSum > 21){
     messageEl.innerHTML = `Dealer BUSTS! You Win!`
@@ -232,12 +222,10 @@ function isWinner(){
   standBtn.setAttribute("hidden", true)
 }
 
-// Refresh the page to main screen
 function home(){
   window.location.reload()
 }
 
-// Toggles light/dark mode
 function lightDark() {
   let element = document.body;
   element.classList.toggle("dark-mode");
