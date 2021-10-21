@@ -137,7 +137,6 @@ function checkPlayerAces(){
   }
 }
 
-
 function checkDealerAces(){
   if(dealerSum + 11 > 21){
     return 1
@@ -177,6 +176,7 @@ function stand(){
     const newDiv = document.createElement('div');
     newDiv.className = "card large"
     dCardEl.appendChild(newDiv)
+    newDiv.classList.add(dRandomCard())
     newDiv.classList.add(dRandomCard())
     if(dealerSum >= playerSum || dealerSum > 21){ // if the dealer count >= the player count. break out of the loop
       isWinner()
