@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  background-color: lightgray;
+  background-color: rgb(190, 190, 190);
 /* Use a system font, if none are available use an available sans-sarif   font */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
   Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -75,8 +75,9 @@ div.card.large{
   align-content: center;
   align-items: center;
   height: 100px;
-  margin-bottom: 100px;
-  margin-left: 140px;
+  width: auto;
+  margin-bottom: 180px;
+  margin-left: 152px;
   font-size: 3rem;
   border-radius: 90%;
 }
@@ -86,6 +87,7 @@ div.card.large{
   height: 80px;
   width: 80px;
   margin-bottom: 50px;
+  margin-left: 50px;
   font-size: 26px;
   border-radius: 80px;
 }
@@ -94,6 +96,7 @@ div.card.large{
   height: 80px;
   width: 80px;
   margin-bottom: 50px;
+  margin-left: 70px;
   font-size: 26px;
   border-radius: 80%;
 }
@@ -101,9 +104,9 @@ div.card.large{
 #playAgainBtn{
   font-size: 50px;
   font-size: 10px;
-  margin: 0 0 0 30px
-  height: 100px;
-  width: 100px
+  margin-left: 120px;
+  height: 80px;
+  width: auto;
   margin-bottom: 50px;
   font-size: 3rem;
   border-radius: 80px
@@ -117,7 +120,7 @@ div.card.large{
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: rgb(210, 210, 223);
+  background-color: rgb(216, 216, 230);
   border-radius: 30px;
 }
 
