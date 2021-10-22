@@ -22,15 +22,17 @@ html {
 
 body {
 /* Use a system font, if none are available use an available sans-sarif   font */
+  background-image: url("../images/pokertable.png");
   font-family: 'Caveat', cursive; system-ui;
   margin: 0;
   display: grid;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  color: white;
 }
 .dark-mode {
-  background-color: rgb(14, 69, 133);
+  background-image: url("../images/blackpokertable.png");
   color: rgb(248, 248, 248);
 }
 
@@ -41,6 +43,8 @@ h1{
   align-content: center;
   justify-content: center;
   text-align: center;
+  font-weight: bolder;
+  margin-top: 0;
 }
 
 #hearts{
@@ -61,12 +65,6 @@ font-size: 4rem;
 font-size: 4rem;
 }
 
-#deck{
-  margin: 0;
-  justify-content: center;
-  align-items: center;
-}
-
 div.card.large{
   margin: 0;
 }
@@ -80,22 +78,30 @@ justify-content: center;
 #pCardEl{
 align-items: center;
 text-align: center;
-
 }
+
+.middle-container{
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+}
+
 #message{
   text-align: center;
   font-family: 'Caveat', cursive; system-ui;
   font-size: 4.5rem;
+  margin-bottom: 80px;
 }
 
 #pTotal{
   font-size: 2rem;
-  background-color: rgb(14, 211, 14);
+  background-color: rgb(22, 155, 22);
 }
 
 #dTotal{
   font-size: 2rem;
-  background-color: rgb(230, 86, 86);
+  background-color: rgb(214, 56, 56);
+  margin-bottom: 8px;
 }
 #btnContainer{
   display: flex;
@@ -104,6 +110,12 @@ text-align: center;
 }
 
 #dealBtn{
+  height: 90px;
+  width: 90px;
+  margin-left: 43%;
+  margin-bottom: 30px;
+  border-radius: 50%;
+  font-size: 2rem;
   transition: all .2s ease-in-out;
 }
 
@@ -155,6 +167,7 @@ transition: all .2s ease-in-out;
 }
 
 #playAgainBtn{
+  background: lemonchiffon;
   font-size: 2rem;
   transition: all .2s ease-in-out;
 }
@@ -165,8 +178,14 @@ transition: all .2s ease-in-out;
 }
 
 #playAgainBtn:hover{
-  background-color: rgb(9, 9, 39);
+  background-color: rgb(86, 172, 75);
   transform: scale(1.1); 
+}
+
+.Top{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
 }
 
 #homeBtn{
@@ -174,16 +193,11 @@ transition: all .2s ease-in-out;
   background-color: rgb(9, 151, 137);
   height: 50px;
   width: 50px;
-  text-align: center;
+  border-radius: 50%;
   font-size: 3rem;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background-color: none;
-  border-radius: 30px;
-  margin-top: 20px;
   border: none;
   transition: all .2s ease-in-out;
+  margin-right: 80px;
 }
 #homeBtn:active{
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.2);
@@ -195,12 +209,10 @@ transition: all .2s ease-in-out;
 }
 
 #lightDarkBtn{
-  font-family: 'Caveat', cursive; system-ui;
   height: 50px;
-  width: auto;
-  border-radius: 30px;
-  margin-bottom: 20px;
-  margin-left: 350px;
+  width: 50px;
+  border-radius: 50%;
+  font-size: .9rem;
   transition: all .2s ease-in-out;
 }
 
