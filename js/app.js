@@ -149,7 +149,6 @@ function checkDealerAces(currentHandCount, acesInHand) {
     ace11HandCount += 1
   }
   if (ace11HandCount > 21) {
-    console.log(currentHandCount, acesInHand)
     return currentHandCount + acesInHand
   } else {
     return ace11HandCount
