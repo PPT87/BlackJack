@@ -37,7 +37,7 @@ Peter Tran
 1. Generally, and for the sake of this particular game, that's it for the rules. 
 
 
-# GAME DESCRIPTION: 
+# Getting Started: 
   1. The main screen will have no cards on the table.
   2. Main screen will offer player to start game by hitting the "DEAL" button. 
   3. The "DEAL" button will initialize the game to start
@@ -49,7 +49,8 @@ Peter Tran
   9. Once a winner/loser has been determined an option to "Play Again?" will appear
 
 # Screenshots:
-
+<img src="images/Game Play.png"> 
+<img src="images/Dark Mode.png"> 
 
 # WIN/LOSE:
 - There are multiple WIN and LOSE conditions that can occur
@@ -74,7 +75,7 @@ Peter Tran
 # Features:
 - The HOME button icon in the top left corner will allow the player to bring the game back to the original game state
 - A LIGHT/DARK mode toggle switch can be accessed in the top left corner for those late night blackjack sessions
-- DOM manipulation to dynamically add card images to screen, change win/lose message and made buttons hidden/appear
+- DOM manipulation to dynamically add card images to screen, change win/lose message and buttons to hide/appear
 
 # What I Used:
 - HTML
@@ -90,6 +91,7 @@ Although it the game functions, there's always something that can improve. Here 
   4. Visuals
   5. UI/UX
   6. Expand
+  7. Refactor code for clean and simple code
 
 
 # Since You're Still Here!
@@ -111,3 +113,9 @@ getbootstrap:
 
 NyteMyre:
 <img src="">https://imgur.com/gallery/zlmjXC9
+
+graphemica:
+<img src="">https://graphemica.com/
+
+googlefonts:
+<img src=""> https://fonts.google.com/specimen/Caveat?query=caveat
