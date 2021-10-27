@@ -1,7 +1,7 @@
 /*-------------------------------- Constants --------------------------------*/
 const switchTheme = document.querySelector("#switch");
 
-const dealerDeck = [
+let dealerDeck = [
   "dA", "dQ", "dK", "dJ", "d10", "d09", "d08", "d07", "d06", "d05", "d04", "d03", "d02",
   "hA", "hQ", "hK", "hJ", "h10", "h09", "h08", "h07", "h06", "h05", "h04", "h03", "h02",
   "cA", "cQ", "cK", "cJ", "c10", "c09", "c08", "c07", "c06", "c05", "c04", "c03", "c02",
@@ -26,7 +26,7 @@ let standBtn = document.getElementById('standBtn')
 let messageEl = document.getElementById('message')
 let playerCardsEl = document.getElementById('playerCards')
 let pCardEl = document.getElementById('pCardEl')
-let dCardEl = document.getElementById('dCardEl')
+let dCardEl = document.getElementById('dCardEl') 
 let pTotalEl = document.getElementById('pTotal')
 let dTotalEl = document.getElementById('dTotal')
 
@@ -40,17 +40,23 @@ document.getElementById('lightDarkBtn').addEventListener('click', lightDark)
 
 /*-------------------------------- Functions --------------------------------*/
 function init() {
+  dealerDeck = [
+    "dA", "dQ", "dK", "dJ", "d10", "d09", "d08", "d07", "d06", "d05", "d04", "d03", "d02",
+    "hA", "hQ", "hK", "hJ", "h10", "h09", "h08", "h07", "h06", "h05", "h04", "h03", "h02",
+    "cA", "cQ", "cK", "cJ", "c10", "c09", "c08", "c07", "c06", "c05", "c04", "c03", "c02",
+    "sA", "sQ", "sK", "sJ", "s10", "s09", "s08", "s07", "s06", "s05", "s04", "s03", "s02"
+  ]
   messageEl.innerText = ""
   pTotalEl.innerText = ""
   dTotalEl.innerText = ""
-  playerHand = []
-  dealerHand = []
   pCardEl.innerHTML = ""
   dCardEl.innerHTML = ""
-  playerSum = 0
-  dealerSum = 0
+  playerHand = []
+  dealerHand = []
   pHandVal = []
   dHandVal = []
+  playerSum = 0
+  dealerSum = 0
   pTotalEl.removeAttribute("hidden", true)
   dTotalEl.removeAttribute("hidden", true)
   playAgainBtn.setAttribute("hidden", true)
